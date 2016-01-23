@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>ballot example</title>
+
+    <!-- Tangle -->
+    <script type="text/javascript" src="Tangle.js"></script>
+
+    <!-- TangleKit (optional) -->
+    <link rel="stylesheet" href="TangleKit/TangleKit.css" type="text/css">
+    <script type="text/javascript" src="TangleKit/mootools.js"></script>
+    <script type="text/javascript" src="TangleKit/sprintf.js"></script>
+    <script type="text/javascript" src="TangleKit/BVTouchable.js"></script>
+    <script type="text/javascript" src="TangleKit/TangleKit.js"></script>
+
+    <!-- Ballot Example -->
+    <script type="text/javascript">
+
+        function setUpTangle () {
+
+            var element = document.getElementById("ballotExample");
+
+            var tangle = new Tangle(element, {
+                initialize: function () {
+                    this.myHouseValue = 750000;
+                    this.levyPerHouse = 25;
+                    this.averageHouseValue = 750000;
+                    this.numYears = 5;
+                    this.percentParticipating = 100;
+
+                    // Assumed constants 
+                    this.numHouses = 50000;
+                    this.perAmount = 1000;
+                },
+                update: function () {
+                    this.myPayment = (this.myHouseValue / this.perAmount) * (this.levyPerHouse / 100);
+                    this.totalAmountRaised = (this.averageHouseValue / this.perAmount) * this.numHouses * (this.percentParticipating / 100) * this.numYears;
+
+                }
+            });
+        }
+
+    </script>
+
+   
+
+
+</head>
+
+<body onload="setUpTangle();">
+
+    <h1> <b>Ballot Example</b></h1>
+
+    <!-- 
+    Can use data-step and data-value 
+    Should fix this back to the other thing -->
+
+    <p id="ballotExample">
+        My property is valued at 
+        $<span data-var="myHouseValue" class="TKAdjustableNumber" data-min="100000" data-max="10000000" data-step="500000"></span>
+        . If the levy is 
+        <span data-var="levyPerHouse" class="TKAdjustableNumber" data-min="1" data-max="50"></span> cents
+        per $1000, then I pay
+        $<span data-var="myPayment" data-format="%0.2f"></span>
+        annually. The average house value in this district is 
+        $<span data-var="averageHouseValue" class="TKAdjustableNumber" data-min="100000" data-max="10000000" data-step="500000"></span>
+        , and with a levy of 
+        <span data-var="levyPerHouse" class="TKAdjustableNumber" data-min="1" data-max="50"></span> cents
+        per $1000 on 
+        <span data-var="percentParticipating" class="TKAdjustableNumber" data-min="0" data-max="100"></span>%
+        of houses, if we collect for 
+        <span data-var="numYears" class="TKAdjustableNumber" data-min="0" data-max="5"></span> years
+        , we can raise 
+        $<span data-var="totalAmountRaised" data-format="%0.2f"></span>
+        in total to help the school districts. 
+    </p>    
+
+    <p>
+   This is based on the assumption that there are approximately 50,000 households in the school district.: 
+   <a href="https://en.wikipedia.org/wiki/Seattle_Public_Schools">https://en.wikipedia.org/wiki/Seattle_Public_Schools</a>
+    </p>
+
+    <p>
+   Original Ballot Measure: 
+   <a href="http://www.kingcounty.gov/depts/elections/how-to-vote/ballots/whats-on-the-ballot/ballot-measures/february-special/list-of-measures/seattle-prop2.aspx">http://www.kingcounty.gov/depts/elections/how-to-vote/ballots/whats-on-the-ballot/ballot-measures/february-special/list-of-measures/seattle-prop2.aspx</a>
+    </p>
+
+
+
+</body>
+</html>
