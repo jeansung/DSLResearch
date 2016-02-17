@@ -14,7 +14,7 @@
         "class_": "TKAdjustableNumber", 
         "data_min": "1", 
         "data_max": "50", 
-        "data_step": "" 
+        "data_step": "1" 
         },
         {
         "data_var" : "averageHouseValue",   
@@ -30,7 +30,7 @@
         "class_": "TKAdjustableNumber", 
         "data_min": "1", 
         "data_max": "50", 
-        "data_step": "" 
+        "data_step": "1" 
         },
         {
         "data_var" : "percentParticipating", 
@@ -38,7 +38,7 @@
         "class_": "TKAdjustableNumber", 
         "data_min": "0", 
         "data_max": "100", 
-        "data_step": "" 
+        "data_step": "5" 
         },
         {
         "data_var" : "numYears", 
@@ -46,7 +46,7 @@
         "class_": "TKAdjustableNumber", 
         "data_min": "0", 
         "data_max": "5", 
-        "data_step": "" 
+        "data_step": "1" 
         }
     ],
     

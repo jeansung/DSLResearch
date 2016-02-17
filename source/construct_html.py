@@ -5,36 +5,18 @@ import markup
 import csv
 import sys 
 
-output_file = "source/ballot_out_raw.html"
-title_text = "ballot example"
-charset_type = "utf_8"
-
-# "ballot.js",
-javascript_files = ["Tangle.js",
-                    "TangleKit/mootools.js", 
-                    "TangleKit/sprintf.js",
-                    "TangleKit/BVTouchable.js",
-                    "TangleKit/TangleKit.js"
-                    ]
-
-css_file = "TangleKit/TangleKit.css"
-body_attrs_list = {"onLoad": "setUpTangle();"}
-
 
 # Defining the head
 page = markup.page()
-page.init( title=title_text, 
-           charset=charset_type,
-           css=css_file,
-           script=javascript_files,
-          bodyattrs=body_attrs_list)
+page.init( title=PAGE_TITLE, 
+           charset=CHARSET_TYPE,
+           css=CSS_FILE,
+           script=JAVASCRIPT_FILES,
+          bodyattrs=BODY_ATTRS_LIST)
+page.h1(PAGE_TITLE)
 
 # Defining the body 
-page.h1(title_text)
-
-# Deal with this later ... 
-page.p(id="ballotExample")
-
+page.p(id=PAGE_ID)
 # Creating meat of text
 for item in globals.TOTAL_CONTENT:
      if item in globals.IND_VAR:
@@ -62,7 +44,7 @@ for item in globals.TOTAL_CONTENT:
 page.p.close()
 
 
-with open(output_file, "wb+") as f:
+with open(GENERATED_FILE, "wb+") as f:
     print(page, file=f)
 f.close()
 

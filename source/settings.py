@@ -11,6 +11,20 @@ DEP_VAR_ATTRS = ["data_var", "display_text", "data_format"]
 VAR_IDENT = "data_var"
 
 # Construct HTML
-
-GENERATED_FILE = "../output/postprocessing.html"
+GENERATED_FILE = "source/postprocessing.html"
 PAGE_TITLE = "SAMPLE"
+CHARSET_TYPE = "utf_8"
+
+JAVASCRIPT_FILES = ["Tangle.js",
+                    "TangleKit/mootools.js", 
+                    "TangleKit/sprintf.js",
+                    "TangleKit/BVTouchable.js",
+                    "TangleKit/TangleKit.js"
+                    ]
+
+CSS_FILE = "TangleKit/TangleKit.css"
+BODY_ATTRS_LIST = {"onLoad": "setUpTangle();"}
+PAGE_ID = "ballotExample"
+
+# Post processing 
+OUTPUT_FILE = "output/final.html"

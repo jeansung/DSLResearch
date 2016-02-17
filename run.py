@@ -4,10 +4,7 @@ from source.variable_parser import *
 from source import globals 
 
 # Initialize globals
-
 globals.init()
-
-
 
 # Parse text 
 inputTextFileLocation = "input/markup_text.txt"
@@ -20,13 +17,7 @@ inputVariableFileLocation = "input/var_def.json"
 #raw_input("Specify the full location of the variable file:")
 readJSONFromFile(inputVariableFileLocation)
 
+# Construct HTML Body 
+# Add Javascript & Post Processing 
 from source.construct_html import *
-
-
-# Construct HTML body
-
-
-# Add Headers + Java script + Post Processing 
-
-
-# Final output
+from source.post_process import *

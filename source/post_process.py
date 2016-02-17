@@ -1,11 +1,10 @@
-input_file = "ballot_out_raw.html"
-javascript_file = "../input/sample_js.html"
-output_file = "../output/ballot_out_final.html"
+from source.settings import *
 
+javascript_file = "input/sample_js.html"
 contents = ""
 
 ## Open generated HTML file
-with open(input_file, "r") as f:
+with open(GENERATED_FILE, "r") as f:
     contents = f.read()
 f.close()
 
@@ -20,6 +19,6 @@ final_contents = contents[:index] + javascript + contents[index:]
 
 
 # Write final file 
-with open(output_file, "w") as g:
+with open(OUTPUT_FILE, "w") as g:
     g.write(final_contents)
 g.close()
