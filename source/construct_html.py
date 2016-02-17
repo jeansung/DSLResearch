@@ -16,7 +16,7 @@ page.init( title=PAGE_TITLE,
 page.h1(PAGE_TITLE)
 
 # Defining the body 
-page.p(id=PAGE_ID)
+page.p(id=globals.VARIABLE_CONTENT['element_id'])
 # Creating meat of text
 for item in globals.TOTAL_CONTENT:
      if item in globals.IND_VAR:
