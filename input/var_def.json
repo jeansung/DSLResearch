@@ -1,0 +1,65 @@
+{ 
+    "ind_var_list": [
+       {    
+        "data_var" : "myHouseValue",   
+        "display_text" : "" , 
+        "class_" : "TKAdjustableNumber", 
+        "data_min" : "100000", 
+        "data_max" : "10000000", 
+        "data_step" : "500000" 
+        }, 
+        {
+        "data_var" : "levyPerHouse", 
+        "display_text": "", 
+        "class_": "TKAdjustableNumber", 
+        "data_min": "1", 
+        "data_max": "50", 
+        "data_step": "" 
+        },
+        {
+        "data_var" : "averageHouseValue",   
+        "display_text" : "" , 
+        "class_" : "TKAdjustableNumber", 
+        "data_min" : "100000", 
+        "data_max" : "10000000", 
+        "data_step" : "500000" 
+        }, 
+        {
+        "data_var" : "levyPerHouse", 
+        "display_text": "", 
+        "class_": "TKAdjustableNumber", 
+        "data_min": "1", 
+        "data_max": "50", 
+        "data_step": "" 
+        },
+        {
+        "data_var" : "percentParticipating", 
+        "display_text": "", 
+        "class_": "TKAdjustableNumber", 
+        "data_min": "0", 
+        "data_max": "100", 
+        "data_step": "" 
+        },
+        {
+        "data_var" : "numYears", 
+        "display_text": "", 
+        "class_": "TKAdjustableNumber", 
+        "data_min": "0", 
+        "data_max": "5", 
+        "data_step": "" 
+        }
+    ],
+    
+    "dep_var_list": [
+        {
+            "data_var": "myPayment",
+            "display_text" : "",
+            "data_format": "%0.2f"
+        },
+        {
+            "data_var": "totalAmountRaised",
+            "display_text" : "",
+            "data_format": "%0.2f"
+        }
+    ]
+}

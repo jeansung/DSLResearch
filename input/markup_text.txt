@@ -1,0 +1,1 @@
+My house is valued at $[myHouseValue] . If the levy is [levyPerHouse] cents per $1000, then I pay ${myPayment} annually. The average house value in this district is $[averageHouseValue] , and with a levy of [levyPerHouse] cents per $1000 on  [percentParticipating] of houses, if we collect for [numYears] , we can raise ${totalAmountRaised} in total to help the school districts.
