@@ -1,6 +1,5 @@
 from source.settings import *
-from source.text_parser import *
-from source.variable_parser import *
+from source.file_io import *
 from source import globals 
 
 # Initialize globals
@@ -20,4 +19,5 @@ readJSONFromFile(inputVariableFileLocation)
 # Construct HTML Body 
 # Add Javascript & Post Processing 
 from source.construct_html import *
-from source.post_process import *
+javascript_file = "input/sample_js.html"
+generateFinal(javascript_file)
