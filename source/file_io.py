@@ -49,7 +49,7 @@ def readJSONFromFile(input_file):
         contents = f.read()
     globals.VARIABLE_CONTENT = json.loads(contents)
 
-def generateFinal(javascript_file):
+def generateFinal(javascript_file, output_file):
     contents = ""
 
     ## Open generated HTML file
@@ -68,6 +68,6 @@ def generateFinal(javascript_file):
 
 
     # Write final file 
-    with open(OUTPUT_FILE, "w") as g:
+    with open(output_file, "w") as g:
         g.write(final_contents)
     g.close()

@@ -8,12 +8,11 @@ import sys
 
 # Defining the head
 page = markup.page()
-page.init( title=PAGE_TITLE, 
+page.init( title="Placeholder title", 
            charset=CHARSET_TYPE,
            css=CSS_FILE,
            script=JAVASCRIPT_FILES,
           bodyattrs=BODY_ATTRS_LIST)
-page.h1(PAGE_TITLE)
 
 # Defining the body 
 page.p(id=globals.VARIABLE_CONTENT['element_id'])
