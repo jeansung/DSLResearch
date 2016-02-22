@@ -8,16 +8,13 @@ DEP_MATCH = "{}"
 VAR_IDENT = "data_var"
 
 # Construct HTML
-GENERATED_FILE = "source/postprocessing.html"
 CHARSET_TYPE = "utf_8"
-JAVASCRIPT_FILES = ["Tangle.js",
-                    "TangleKit/mootools.js", 
-                    "TangleKit/sprintf.js",
-                    "TangleKit/BVTouchable.js",
-                    "TangleKit/TangleKit.js"
+JAVASCRIPT_FILES = ["dependencies/Tangle.js",
+                    "dependencies/TangleKit/mootools.js", 
+                    "dependencies/TangleKit/sprintf.js",
+                    "dependencies/TangleKit/BVTouchable.js",
+                    "dependencies/TangleKit/TangleKit.js"
                     ]
-CSS_FILE = "TangleKit/TangleKit.css"
-BODY_ATTRS_LIST = {"onLoad": "setUpTangle();"}
+CSS_FILE = "dependencies/TangleKit/TangleKit.css"
 
-# Post processing 
-OUTPUT_FILE = "output/final.html"
+

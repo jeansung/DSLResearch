@@ -1,6 +1,9 @@
 from source.settings import *
 from source.file_io import *
+from source.construct_html import *
 from source import globals 
+from shutil import copyfile
+import os
 
 # Print statement settings
 DEBUG = True 
@@ -27,14 +30,24 @@ readJSONFromFile(inputVariableFileLocation)
 # Add Javascript & Post Processing 
 if DEBUG:
     print "Constructing the HTML file  . . ."
-from source.construct_html import *
-javascript_file = "input/sample_js.html"
+
+
+javascript_file = "input/ballot.js"
 #raw_input("Specify the full location of the variable usage file: ")
 output_file = "output/ballot.html"
+#raw_input("Specifc the location of the output file: ")
+
+# copy the input javascript file to the correct location
+# generate the output html
+javascript_file_name = os.path.basename(javascript_file)
+javascript_file_out = "output/" + javascript_file_name
+copyfile(javascript_file, javascript_file_out)
+
+
 if DEBUG:
     print "Integrating the mathematical model and generating output html file . . ."
-#raw_input("Specifc the location of the output file: ")
-generateFinal(javascript_file, output_file)
+
+generatePage(javascript_file_name, output_file)
 
 if DEBUG:
     print "Finished. Find the output file in the output directory."

@@ -2,38 +2,16 @@
 <html lang="en">
 <head>
 <meta content="text/html; charset=utf_8" http-equiv="Content-Type" />
-<link media="all" href="TangleKit/TangleKit.css" type="text/css" rel="stylesheet" />
+<link media="all" href="dependencies/TangleKit/TangleKit.css" type="text/css" rel="stylesheet" />
 <title>Placeholder title</title>
-<script src="Tangle.js" type="text/javascript"></script>
-<script src="TangleKit/mootools.js" type="text/javascript"></script>
-<script src="TangleKit/sprintf.js" type="text/javascript"></script>
-<script src="TangleKit/BVTouchable.js" type="text/javascript"></script>
-<script src="TangleKit/TangleKit.js" type="text/javascript"></script>
-<script type="text/javascript">
-function setUpTangle () {
-    var element = document.getElementById("ballotExample");
-
-    var tangle = new Tangle(element, {
-        initialize: function () {
-            this.myHouseValue = 750000;
-            this.levyPerHouse = 25;
-            this.averageHouseValue = 750000;
-            this.numYears = 5;
-            this.percentParticipating = 100;
-
-            // Assumed constants 
-            this.numHouses = 50000;
-            this.perAmount = 1000;
-        },
-        update: function () {
-            this.myPayment = (this.myHouseValue / this.perAmount) * (this.levyPerHouse / 100);
-            this.totalAmountRaised = (this.averageHouseValue / this.perAmount) * this.numHouses * (this.percentParticipating / 100) * this.numYears;
-
-        }
-    });
-}
-</script></head>
-<body onLoad="setUpTangle();">
+<script src="dependencies/Tangle.js" type="text/javascript"></script>
+<script src="dependencies/TangleKit/mootools.js" type="text/javascript"></script>
+<script src="dependencies/TangleKit/sprintf.js" type="text/javascript"></script>
+<script src="dependencies/TangleKit/BVTouchable.js" type="text/javascript"></script>
+<script src="dependencies/TangleKit/TangleKit.js" type="text/javascript"></script>
+<script src="ballot.js" type="text/javascript"></script>
+</head>
+<body>
 <p id="ballotExample">
 My house is valued at $
 <span class="TKAdjustableNumber" data-var="myHouseValue" data-max="10000000" data-step="500000" data-min="100000"></span>

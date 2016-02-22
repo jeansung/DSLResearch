@@ -19,15 +19,15 @@ Code for model driven reading and writing.
 |:------|:----------------------|:------------------|
 | Markup Text | Can write this in plain text, with annotations for the variables. The convention is using [] to wrap the names of independent variables and {} to wrap names of dependent variables. A variable cannot be both an independent variable and a dependent variable. | `input/markup_text.txt`| 
 | Variable Definition | Currently specified in a JSON file. The `element_id` field refers to the name of the javascript element in the final html document. Independent variable have the following fields: `data_var`, `display_text`, `class_`, `data_min`, `data_max`, `data_step`. Dependent variables have the following fields: `data_var`, `display_text`, `data_format`. No fields are optional except `display_text` which must be an empty string. | `input/var_def.json`
-| Variable Usage | Currently specified as javascript, according to the original Tangle library requirements. | `input/sample_js.html`|
+| Variable Usage | Currently specified as javascript, according to the original Tangle library requirements. | `input/ballot.js`|
 
 
 ### Output 
 
 | File | Details | Example File(s) Name |
 |:------|:-------|:---------------------|
-| Output HTML File | This is the file that is the output of running `run.py`. It contains the javascript and the HTML necessary to render the final product. | `{}.html` |
-| Files that are not HTML | Dependencies that need to be in the same directory as the generated HTML file so it can properly render. | `TangleKit`, `Tangle.js`, and `style.css` | 
+| Output HTML File + Javascript file | Files necessary to render the final interactive document| `{}.html` and `{}.js` |
+| `dependencies/` | Dependencies that need to be in the same directory as the generated HTML file so it can properly render. | `TangleKit/`, `Tangle.js`, and `style.css` | 
 
 ### Source 
 
@@ -37,11 +37,8 @@ Code for model driven reading and writing.
 | `source/markup.py` | Markup library used to generate HTML file. | 
 | `source/settings.py` | Settings and parameters dealing with parsing and json representation | 
 | `source/globals.py`` | Global variables, specifically the list of independent and dependent variables as well as the total content of the text and the json specification. | 
-| `source/file_io.py` | Functions to read in text and variable specification files as well as generate file HTML file. |
-| `source/construct_html.py` | Function to construct the HTML pulling from text and variable specification. |
-| `source/postprocessing.html` | Generated HTML file during between the initial construction and the post processing step where the Javascript is inserted. Can safely be discarded and ignored. | 
-
-
+| `source/file_io.py` | Functions to read in text and variable specification files. |
+| `source/construct_html.py` | Function to construct the HTML pulling from text and variable specification. Responsible for generating final HTML file. |
 
 
 

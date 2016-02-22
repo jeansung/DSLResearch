@@ -48,26 +48,3 @@ def readJSONFromFile(input_file):
     with open(input_file, "r") as f:
         contents = f.read()
     globals.VARIABLE_CONTENT = json.loads(contents)
-
-def generateFinal(javascript_file, output_file):
-    contents = ""
-
-    ## Open generated HTML file
-    with open(GENERATED_FILE, "r") as f:
-        contents = f.read()
-    f.close()
-
-
-    # Fix the _ to -
-    contents = contents.replace("data_", "data-")
-
-    # insert the relevant javascript file, before the close head bracket 
-    index = contents.find('</head>')
-    javascript = open(javascript_file, "r").read()
-    final_contents = contents[:index] + javascript + contents[index:]
-
-
-    # Write final file 
-    with open(output_file, "w") as g:
-        g.write(final_contents)
-    g.close()
