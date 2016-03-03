@@ -13,19 +13,40 @@
 </head>
 <body>
 <p id="parkExample">
-Suppose that an extra 
+Proposition 21:  Vehicle License Fee for State Parks. The way it is now: California has 
+<span data-var="parkCount" data-format=""></span>
+ state parks, including state beaches and historic parks. The current $ 
+<span data-var="oldBudget" data-format="e6"></span>
+ million budget is insufficient to maintain these parks, and 
+<span data-var="oldClosedParkCount" data-format=""></span>
+ parks will be shut down at least part-time. Most parks charge 
+<span data-var="oldAdmission" data-format="dollars"></span>
+ per vehicle for admission. Suppose that an extra $
 <span class="TKAdjustableNumber" data-var="tax" data-max="50" data-step="1" data-min="0"></span>
  was charged to 
 <span class="TKAdjustableNumber" data-var="percentCompliance" data-max="100" data-step="1" data-min="0"></span>
- % of 
+% of 
 <span class="TKToggle TKSwitch" data-var="isTaxPerVehicle"><span>all tax payers</span> <span>all vehicle registrations</span></span>
 . Park Admission would is set at 
 <span class="TKAdjustableNumber" data-var="newAdmission" data-max="25" data-step="1" data-min="0"></span>
  for 
 <span class="TKToggle TKSwitch" data-var="newAdmissionAppliesToEveryone"><span>those who paid the charge</span> <span>everyone </span></span>
 . This would 
-<span class="TKSwitchPositiveNegative" data-var="deltaBudget"><span>collect</span> <span>lose</span></span>
- money for the state.  
+<span class="TKSwitchPositiveNegative" data-var="deltaBudget"><span>collect an extra</span> <span>lose</span></span>
+ $
+<span data-var="deltaBudget" data-format="abs_e6"></span>
+ million, $
+<span data-var="taxCollected" data-format="e6"></span>
+ million from the tax, 
+<span class="TKSwitchPositiveNegative" data-var="deltaRevenue"><span>plus</span> <span>minus</span></span>
+ $
+<span data-var="deltaRevenue" data-format="abs_e6"></span>
+ million from the admission for a total state park budget of $
+<span data-var="budget" data-format="e6"></span>
+ million.  
+
+
+
 </p>
 </body>
 </html>

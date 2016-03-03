@@ -43,20 +43,65 @@
     
     "dep_var_list": [
         {
-            "data_var": "deltaBudget",
+            "data_var": "deltaBudgetSign",
             "class_":"TKSwitchPositiveNegative",
-            "positive": "collect",
+            "backing_variable": "deltaBudget",
+            "positive": "collect an extra",
             "negative": "lose"
+        },
+        {
+            "data_var": "deltaBudget",
+            "data_format": "abs_e6"
+        },
+        {
+            "data_var": "taxCollected",
+            "data_format": "e6"
+        },
+        {
+            "data_var": "deltaRevenueSign",
+            "class_": "TKSwitchPositiveNegative",
+            "backing_variable": "deltaRevenue",
+            "positive": "plus",
+            "negative": "minus"
+        },
+        {
+            "data_var": "deltaRevenue",
+            "data_format" : "abs_e6"
+        }, 
+        {
+            "data_var": "budget", 
+            "data_format": "e6"
         }
     ], 
     "const_list": [
         {
+            "data_var": "parkCount",
+            "data_value": 278,
+            "data_format": ""
+        },
+        {
+            "data_var":"oldBudget",
+            "data_format":"e6",
+            "data_value":400e6
+        },
+        {
+            "data_var": "oldClosedParkCount",
+            "data_value": 150,
+            "data_format": ""
+        },
+        {
+            "data_var": "oldAdmission",
+            "data_format": "dollars"
+        },
+        {
             "data_var": "taxpayerCount",
-            "data_value": 13657632
+            "data_value": 13657632,
+            "data_format": ""
         },
         {
             "data_var": "registeredVehicleCount",
-            "data_value": 28e6
+            "data_value": 28e6,
+            "data_format": ""
         }
     ]
 }

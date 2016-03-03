@@ -1,0 +1,8 @@
+
+<p>This would <span data-var="deltaBudget" class="TKSwitchPositiveNegative"><span>collect an extra</span><span>lose</span></span>
+        $<span data-var="deltaBudget" data-format="abs_e6"></span> million
+        ($<span data-var="taxCollected" data-format="e6"></span> million from the tax,
+        <span data-var="deltaRevenue" class="TKSwitchPositiveNegative"><span>plus</span><span>minus</span></span>
+        $<span data-var="deltaRevenue" data-format="abs_e6"></span> million
+        <span data-var="deltaRevenue" class="TKSwitchPositiveNegative"><span>additional</span><span>lost</span></span> revenue from admission)
+        for a total state park budget of $<span data-var="budget" data-format="e6"></span> million.

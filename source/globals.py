@@ -6,6 +6,9 @@ def init():
     global DEP_VAR
     DEP_VAR = []
 
+    global CONST
+    CONST = []
+
     global TOTAL_CONTENT
     TOTAL_CONTENT = []
 

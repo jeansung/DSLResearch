@@ -1,6 +1,7 @@
 # Parser Settings 
-VARIABLE_BEGIN = ["[", "{"]
-VARIABLE_END = ["]", "}"] 
+VARIABLE_BEGIN = ["[", "{", "("]
+VARIABLE_END = ["]", "}", ")"] 
+CONST_MATCH = "()" 
 IND_MATCH = "[]"
 DEP_MATCH = "{}"
 

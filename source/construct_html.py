@@ -24,11 +24,8 @@ def generatePage(javacript_filepath, output_file):
        if item in globals.IND_VAR:
           varString = item[1:-1]
           for ind in globals.VARIABLE_CONTENT['ind_var_list']:
-            # Variable match 
               if ind[VAR_IDENT] == varString:
-
                   if ind["class_"] == "TKAdjustableNumber":
-                    print("number match")
                     page.span(ind['display_text'],
                               data_var=ind['data_var'],
                               class_=ind['class_'],
@@ -36,7 +33,6 @@ def generatePage(javacript_filepath, output_file):
                               data_max=ind['data_max'],
                               data_step=ind['data_step'])
                   elif ind["class_"] == "TKToggle TKSwitch":
-                    print("option match")
                     # Collect text options
                     text_options = extractDisplayValues(ind['data_values'])
                     nested_spans = [e.span(i) for i in text_options]
@@ -51,16 +47,23 @@ def generatePage(javacript_filepath, output_file):
           varString = item[1:-1]
           for dep in globals.VARIABLE_CONTENT['dep_var_list']:
               if dep[VAR_IDENT] == varString:
-                if dep['class_'] == "TKSwitchPositiveNegative":
+                if "class_" in dep and dep['class_'] == "TKSwitchPositiveNegative":
                   nested_spans = e.span(dep["positive"]), e.span(dep["negative"])
                   nested_spans_text = str(" ").join(nested_spans)
                   page.span(nested_spans_text,
-                            data_var=dep['data_var'],
+                            data_var=dep['backing_variable'],
                             class_=dep['class_'])
                 else:
-                  page.span(dep['display_text'],
+                  page.span("",
                             data_var=dep['data_var'],
                             data_format=dep['data_format'])
+       elif item in globals.CONST:
+          varString = item[1:-1]
+          for const in globals.VARIABLE_CONTENT['const_list']:
+              if const[VAR_IDENT] == varString:
+                page.span("",
+                          data_var=const["data_var"],
+                          data_format=const["data_format"])
        else:
           page.add(item)
   page.p.close()

@@ -24,6 +24,8 @@ def processText(file_content):
                     globals.IND_VAR.append(current_string)
                 elif brackets == DEP_MATCH:
                     globals.DEP_VAR.append(current_string)
+                elif brackets == CONST_MATCH:
+                    globals.CONST.append(current_string)
                 else:
                     print "Error - Brackets Mismatched." 
                     sys.exit()
@@ -42,9 +44,11 @@ def processText(file_content):
                 lastCharacter = i == (len(file_content) -1)
                 if lastCharacter:
                     globals.TOTAL_CONTENT.append(current_string)
-    print "total:", globals.TOTAL_CONTENT
-    print "ind: ", globals.IND_VAR
-    print "dep: ", globals.DEP_VAR
+    
+    # print "total:", globals.TOTAL_CONTENT
+    # print "ind: ", globals.IND_VAR
+    # print "dep: ", globals.DEP_VAR
+    # print "const: ", globals.CONST
 
 def readJSONFromFile(input_file):
     contents = ""
