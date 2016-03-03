@@ -2,6 +2,7 @@ from __future__ import print_function
 from source.settings import *
 import globals
 import markup
+from markup import oneliner as e
 import csv
 import sys 
 
@@ -23,20 +24,40 @@ def generatePage(javacript_filepath, output_file):
        if item in globals.IND_VAR:
           varString = item[1:-1]
           for ind in globals.VARIABLE_CONTENT['ind_var_list']:
+            # Variable match 
               if ind[VAR_IDENT] == varString:
-                  # Change this shit to template stuff?     
-                  page.span(ind['display_text'],
-                            data_var=ind['data_var'],
-                            class_=ind['class_'],
-                            data_min=ind['data_min'],
-                            data_max=ind['data_max'],
-                            data_step=ind['data_step'])
-                  break 
+
+                  if ind["class_"] == "TKAdjustableNumber":
+                    print("number match")
+                    page.span(ind['display_text'],
+                              data_var=ind['data_var'],
+                              class_=ind['class_'],
+                              data_min=ind['data_min'],
+                              data_max=ind['data_max'],
+                              data_step=ind['data_step'])
+                  elif ind["class_"] == "TKToggle TKSwitch":
+                    print("option match")
+                    # Collect text options
+                    text_options = extractDisplayValues(ind['data_values'])
+                    nested_spans = [e.span(i) for i in text_options]
+                    nested_spans_text = str(" ".join(nested_spans))
+        
+                    page.span(nested_spans_text,
+                              data_var=ind['data_var'],
+                              class_=ind['class_']                        
+                              )
+         
        elif item in globals.DEP_VAR:
           varString = item[1:-1]
           for dep in globals.VARIABLE_CONTENT['dep_var_list']:
               if dep[VAR_IDENT] == varString:
-                  # Change this shit to template stuff?
+                if dep['class_'] == "TKSwitchPositiveNegative":
+                  nested_spans = e.span(dep["positive"]), e.span(dep["negative"])
+                  nested_spans_text = str(" ").join(nested_spans)
+                  page.span(nested_spans_text,
+                            data_var=dep['data_var'],
+                            class_=dep['class_'])
+                else:
                   page.span(dep['display_text'],
                             data_var=dep['data_var'],
                             data_format=dep['data_format'])
@@ -63,5 +84,14 @@ def generatePage(javacript_filepath, output_file):
   with open(output_file, "w") as h:
       h.write(contents)
   h.close()
+
+
+
+def extractDisplayValues(dict_list):
+  display_values = []
+  for dicts in dict_list:
+    for key in dicts:
+      display_values.append(dicts[key])
+  return display_values
 
 

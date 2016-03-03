@@ -1,0 +1,1 @@
+Suppose that an extra [tax] was charged to [percentCompliance] % of [isTaxPerVehicle]. Park Admission would is set at [newAdmission] for [newAdmissionAppliesToEveryone]. This would {deltaBudget} money for the state.  

@@ -42,6 +42,9 @@ def processText(file_content):
                 lastCharacter = i == (len(file_content) -1)
                 if lastCharacter:
                     globals.TOTAL_CONTENT.append(current_string)
+    print "total:", globals.TOTAL_CONTENT
+    print "ind: ", globals.IND_VAR
+    print "dep: ", globals.DEP_VAR
 
 def readJSONFromFile(input_file):
     contents = ""

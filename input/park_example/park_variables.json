@@ -1,0 +1,62 @@
+{ 
+    "element_id" : "parkExample",
+    "ind_var_list": [
+       {    
+            "data_var" : "tax",   
+            "display_text" : "" , 
+            "class_" : "TKAdjustableNumber", 
+            "data_min" : "0", 
+            "data_max" : "50", 
+            "data_step" : "1" 
+        }, 
+        {
+            "data_var" : "percentCompliance", 
+            "display_text": "", 
+            "class_": "TKAdjustableNumber", 
+            "data_min": "0", 
+            "data_max": "100", 
+            "data_step": "1" 
+        },
+        {
+            "data_var" : "isTaxPerVehicle",   
+            "class_" : "TKToggle TKSwitch", 
+            "data_values" : [{"taxpayerCount": "all tax payers"}, 
+                             {"registeredVehicleCount": "all vehicle registrations"}]
+        }, 
+        {
+            "data_var" : "newAdmissionAppliesToEveryone", 
+            "class_": "TKToggle TKSwitch", 
+            "data_values": [ {"isTaxPerVehicle": "those who paid the charge"} ,
+                             {"population": "everyone "}
+                             ]
+        },
+        {
+            "data_var": "newAdmission", 
+            "display_text": "",
+            "class_": "TKAdjustableNumber",
+            "data_min": "0",
+            "data_max": "25", 
+            "data_step": "1",
+            "data_format": "free"
+        }
+    ],
+    
+    "dep_var_list": [
+        {
+            "data_var": "deltaBudget",
+            "class_":"TKSwitchPositiveNegative",
+            "positive": "collect",
+            "negative": "lose"
+        }
+    ], 
+    "const_list": [
+        {
+            "data_var": "taxpayerCount",
+            "data_value": 13657632
+        },
+        {
+            "data_var": "registeredVehicleCount",
+            "data_value": 28e6
+        }
+    ]
+}
