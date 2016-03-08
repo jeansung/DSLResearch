@@ -65,15 +65,46 @@
             "negative": "minus"
         },
         {
+            "data_var": "deltaRevenueSign2",
+            "class_": "TKSwitchPositiveNegative",
+            "backing_variable": "deltaRevenue",
+            "positive": "additional",
+            "negative": "lost"
+        },
+        {
             "data_var": "deltaRevenue",
             "data_format" : "abs_e6"
         }, 
         {
             "data_var": "budget", 
             "data_format": "e6"
+        }, 
+        {
+            "data_var": "scenarioIndex",
+            "class_": "TKSwitch",
+            "isRecursive": true,
+            "options": [
+                "This is not sufficient to maintain the parks and {closedParkCount} parks would be shut down at least part time.",
+                "This is sufficient to maintain the parks in their current state, but not found a program to bring safety and cleanliness up to acceptable standards",
+                "This is sufficient to maintain the parks in their current states, plus fund a program to bring safety and cleanliness to acceptable standards over the next {restorationTime} years.",
+                "This is sufficient to maintain the parks and bring safety and cleanliness up to acceptable standards, leaving a {surplus} million per year surplus."
+                ]
+        },
+        {
+            "data_var": "closedParkCount",
+            "data_format": ""
+        },
+        {
+            "data_var": "restorationTime",
+            "data_format": ""
+        },
+        {
+            "data_var": "surplus",
+            "data_format": "e6"
         }
+
     ], 
-    "const_list": [
+    "consts_list": [
         {
             "data_var": "parkCount",
             "data_value": 278,

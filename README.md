@@ -4,6 +4,10 @@ Code for model driven reading and writing.
 * Originally sourced from: http://worrydream.com/Tangle/
 * Documents for this project live [here](https://drive.google.com/a/g.hmc.edu/folderview?id=0B9z84Or5GzOnazl4a25UZV9yTHc&usp=drive_web)
 
+## TODOs and Fixes
+* Find a new symbol for constants, cannot overload parentheses because they are too common in text
+* Include start value of variables in variable definition file, Start pulling these variables to initialize the javascript script files 
+
 ## Version 1
 
 * *How to run*: Specify a markup text file, the variable definition file, and the variable usage file in the `input` directory. Then, in the main directory run `python run.py`. The output file can be found as an `html` file in the `output` directory. It is important to leave this file in the output directory 

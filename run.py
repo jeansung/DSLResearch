@@ -1,53 +1,36 @@
 from source.settings import *
-from source.file_io import *
-from source.construct_html import *
-from source import globals 
+from source.helper import *
 from shutil import copyfile
 import os
 
-# Print statement settings
-DEBUG = True 
-
-# Initialize globals
-globals.init()
-
-# Parse text 
-inputTextFileLocation = "input/park_example/park_markup.txt"
-#raw_input("Specify the full location of the markup file: ")
-if DEBUG:
-    print "Parsing the input text . . ."
-inputText = readFile(inputTextFileLocation)
-processText(inputText)
-
-# Parse Variables 
-inputVariableFileLocation = "input/park_example/park_variables.json"
-#raw_input("Specify the full location of the variable definition file: ")
-if DEBUG:
-    print "Parsing the variable definition file . . ."
-readJSONFromFile(inputVariableFileLocation)
-
-# Construct HTML Body 
-# Add Javascript & Post Processing 
-if DEBUG:
-    print "Constructing the HTML file  . . ."
+# File locations 
+inputDirectory = "input/park_example/"
+inputTextFile = "park_markup.txt"
+inputVariableFile = "park_variables.json"
+inputJSFile = "park_math.js"
+outputDirectory = "output/"
+outputHTMLFile = "park.html"
 
 
-javascript_file = "input/park_example/park_math.js"
-#raw_input("Specify the full location of the variable usage file: ")
-output_file = "output/park.html"
-#raw_input("Specifc the location of the output file: ")
+# Copy Javascript from input to correct location 
+baseJSFile = os.path.basename(inputJSFile)
+outputJSFile = outputDirectory + baseJSFile
+copyfile(inputDirectory+inputJSFile, outputJSFile)
 
-# copy the input javascript file to the correct location
-# generate the output html
-javascript_file_name = os.path.basename(javascript_file)
-javascript_file_out = "output/" + javascript_file_name
-copyfile(javascript_file, javascript_file_out)
+# File Contents
+textContents = getTextFromFile(inputDirectory+inputTextFile)
+jsonContents = getJSONFromFile(inputDirectory+inputVariableFile)
 
+# Text / Variable Processing 
+pieces, indVarList, depVarList, constsList = processText(textContents)
+indVarDef = jsonContents['ind_var_list']
+depVarDef = jsonContents['dep_var_list']
+constsDef = jsonContents['consts_list']
+pageID = jsonContents['element_id']
 
-if DEBUG:
-    print "Integrating the mathematical model and generating output html file . . ."
-
-generatePage(javascript_file_name, output_file)
-
-if DEBUG:
-    print "Finished. Find the output file in the output directory."
+# Generate HTML Page  
+page = startHTMLPage(inputJSFile, pageID)
+page = populateHTML(page, pieces, indVarList, depVarList, constsList,
+                                  indVarDef, depVarDef, constsDef, 
+                                  RECURSIVE_DEPTH_LIMIT)
+closeHTMLPage(page, outputDirectory+outputHTMLFile)

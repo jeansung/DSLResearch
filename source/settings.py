@@ -18,4 +18,5 @@ JAVASCRIPT_FILES = ["dependencies/Tangle.js",
                     ]
 CSS_FILE = "dependencies/TangleKit/TangleKit.css"
 
-
+# For dependent variables with programs embedded
+RECURSIVE_DEPTH_LIMIT = 2
