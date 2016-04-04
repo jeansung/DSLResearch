@@ -1,80 +1,136 @@
 <!DOCTYPE html>
-<html>
+<html ng-app>
   <head>
     <title>Quill Editor Demo</title>
     <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" media="all" href="styles/style2.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+
     <meta charset="utf-8">
   </head>
-  <body>
+  <body ng-controller="textDisplayControl">
     <div id="content-container">
       <div id="editor-wrapper">
-        <div id="formatting-container">
-          <select title="Font" class="ql-font">
-            <option value="sans-serif" selected>Sans Serif</option>
-            <option value="Georgia, serif">Serif</option>
-            <option value="Monaco, 'Courier New', monospace">Monospace</option>
-          </select>
-          <select title="Size" class="ql-size">
-            <option value="10px">Small</option>
-            <option value="13px" selected>Normal</option>
-            <option value="18px">Large</option>
-            <option value="32px">Huge</option>
-          </select>
-          <select title="Text Color" class="ql-color">
-            <option value="rgb(255, 255, 255)">White</option>
-            <option value="rgb(0, 0, 0)" selected>Black</option>
-            <option value="rgb(255, 0, 0)">Red</option>
-            <option value="rgb(0, 0, 255)">Blue</option>
-            <option value="rgb(0, 255, 0)">Lime</option>
-            <option value="rgb(0, 128, 128)">Teal</option>
-            <option value="rgb(255, 0, 255)">Magenta</option>
-            <option value="rgb(255, 255, 0)">Yellow</option>
-          </select>
-          <select title="Background Color" class="ql-background">
-            <option value="rgb(255, 255, 255)" selected>White</option>
-            <option value="rgb(0, 0, 0)">Black</option>
-            <option value="rgb(255, 0, 0)">Red</option>
-            <option value="rgb(0, 0, 255)">Blue</option>
-            <option value="rgb(0, 255, 0)">Lime</option>
-            <option value="rgb(0, 128, 128)">Teal</option>
-            <option value="rgb(255, 0, 255)">Magenta</option>
-            <option value="rgb(255, 255, 0)">Yellow</option>
-          </select>
-          <select title="Text Alignment" class="ql-align">
-            <option value="left" selected>Left</option>
-            <option value="center">Center</option>
-            <option value="right">Right</option>
-            <option value="justify">Justify</option>
-          </select>
-          <button title="Bold" class="ql-format-button ql-bold">Bold</button>
-          <button title="Italic" class="ql-format-button ql-italic">Italic</button>
-          <button title="Underline" class="ql-format-button ql-underline">Under</button>
-          <button title="Strikethrough" class="ql-format-button ql-strike">Strike</button>
-          <button title="Link" class="ql-format-button ql-link">Link</button>
-          <button title="Image" class="ql-format-button ql-image">Image</button>
-          <button title="Bullet" class="ql-format-button ql-bullet">Bullet</button>
-          <button title="List" class="ql-format-button ql-list">List</button>
-        </div>
+       <h1> Text Editor: <h1> 
         <div id="editor-container"></div>
       </div>
+    </div> 
+    <br>
+    <br>
+    <br>
+
+    <h1> Step 2: Define Variables </h1>
+    <a href="#" id="ghsubmitbtn" ng-click="getParseText()">Load Variables</a>
+    
+    <div class="repolist clearfix">
+      <h2> Independent Variables </h2>
+      <ul ng-repeat="i in indVarList">
+         <li><a href="#"> {{i}} </a></li>
+      </ul>
+
+      <br>
+      <br>
+
+      <h2> Dependent Variables </h2>
+      <ul ng-repeat="j in depVarList">
+       <li><a href="#">  {{j}} </a></li>
+      </ul>
+
+      <br>
+      <br>
+    
+
+      <h2> Constants </h2>
+      <ul ng-repeat="k in constsList">
+         <li><a href="#"> {{k}} </a></li>
+      </ul>
+
     </div>
+   
     <script type="text/javascript" src="../quill.js"></script>
     <script type="text/javascript">
-      var editor = new Quill('#editor-container', {
-        modules: {
-          'toolbar': { container: '#formatting-container' },
-          'link-tooltip': true,
-          'image-tooltip': true
+      var editor = new Quill('#editor-container', {});
+      
+    function textDisplayControl($scope) {
+    $scope.getParseText = function() {
+      var rawText = editor.getText();
+
+      // Constants for processing text
+      const MATH_BEGIN = ["(", "[", "{"];
+      const MATH_END = [")", "]", "}"];
+      const CONST_MATCH = "()";
+      const IND_MATCH = "[]";
+      const DEP_MATCH = "{}";
+
+      // Variables for processing text
+      var currentChar = "";
+      var currentString = "";
+      var variableMode = false;
+
+      // Variables that contain the pieces after processing
+      var pieces = [];
+      var indVar = [];
+      var depVar = [];
+      var consts = [];
+
+      for (var i = 0, len = rawText.length; i < len; i++) {
+        currentChar = rawText[i];
+        if (variableMode) {
+          currentString = currentString.concat(currentChar);
+          var isEndVariable = MATH_END.indexOf(currentChar) > -1;
+          if (isEndVariable) {
+            pieces.push(currentString);
+            var beginBracket = currentString[0];
+            var endBracket = currentString[currentString.length-1];
+            var brackets = beginBracket.concat(endBracket);
+            if (brackets === IND_MATCH) {
+              indVar.push(currentString);
+            } else if (brackets === DEP_MATCH) {
+              depVar.push(currentString);
+            } else if (brackets === CONST_MATCH) {
+              consts.push(currentString);
+            } else {
+              console.log("Error -- Bracket Mismatched.");
+            }
+            // Reset string 
+            currentString = ""
+            variableMode = false;
+          } 
+        } else {
+          var isBeginVariable = MATH_BEGIN.indexOf(currentChar) > -1;
+          if (isBeginVariable) {
+            pieces.push(currentString);
+            currentString = "";
+            currentString = currentString.concat(currentChar);
+            variableMode = true;
+          } else {
+            currentString = currentString.concat(currentChar);
+            var isLastChar = (i === (len -1));
+            if (isLastChar) {
+              pieces.push(currentString);
+            }
+          }
         }
-      });
-      
-      
-    function myFunction() {
-      console.log(editor.getText(), editor.getLength());
+      }
+
+      console.log("pieces: ", pieces);
+      console.log("ind var list: ", indVar);
+      console.log("dep var list: ", depVar);
+      console.log("consts list: ",consts);
+
+      // Variables to display pieces
+      $scope.piecesList = pieces;
+      $scope.indVarList = indVar;
+      $scope.depVarList = depVar;
+      $scope.constsList = consts;
+
     };
+    };  
     </script>
     <br>
     <br>
-    <button onclick="myFunction()">Next, define my variables!</button>
+    
   </body>
 </html>
