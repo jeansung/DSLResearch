@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html ng-app>
+  <head>
+    <title> EasyMath Demo</title>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" media="all" href="styles/style2.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+
+    <meta charset="utf-8">
+  </head>
+  <body ng-controller="textDisplayControl">
+     <h1> Text Editor: <h1> 
+    <div id="content-container">
+      <div id="editor-wrapper">
+        <div id="editor-container"></div>
+      </div>
+    </div> 
+    <br>
+    <br>
+    <br>
+
+    <h1> Step 2: Define Variables </h1>
+    <a href="#" id="ghsubmitbtn" ng-click="getParseText()">Load Variables</a>
+    
+    <div class="repolist clearfix">
+      <h2> Independent Variables </h2>
+      <ul ng-repeat="i in indVarList">
+         <li><a href="#"> {{i}} </a></li>
+      </ul>
+
+      <br>
+      <br>
+
+      <h2> Dependent Variables </h2>
+      <ul ng-repeat="j in depVarList">
+       <li><a href="#">  {{j}} </a></li>
+      </ul>
+
+      <br>
+      <br>
+    
+
+      <h2> Constants </h2>
+      <ul ng-repeat="k in constsList">
+         <li><a href="#"> {{k}} </a></li>
+      </ul>
+
+    </div>
+   
+    <script type="text/javascript" src="../quill.js"></script>
+    <script type="text/javascript">
+      var editor = new Quill('#editor-container', {});
+      
+    function textDisplayControl($scope) {
+    $scope.getParseText = function() {
+      var rawText = editor.getText();
+
+      // Constants for processing text
+      const MATH_BEGIN = ["(", "[", "{"];
+      const MATH_END = [")", "]", "}"];
+      const CONST_MATCH = "()";
+      const IND_MATCH = "[]";
+      const DEP_MATCH = "{}";
+
+      // Variables for processing text
+      var currentChar = "";
+      var currentString = "";
+      var variableMode = false;
+
+      // Variables that contain the pieces after processing
+      var pieces = [];
+      var indVar = [];
+      var depVar = [];
+      var consts = [];
+
+      for (var i = 0, len = rawText.length; i < len; i++) {
+        currentChar = rawText[i];
+        if (variableMode) {
+          currentString = currentString.concat(currentChar);
+          var isEndVariable = MATH_END.indexOf(currentChar) > -1;
+          if (isEndVariable) {
+            pieces.push(currentString);
+            var beginBracket = currentString[0];
+            var endBracket = currentString[currentString.length-1];
+            var brackets = beginBracket.concat(endBracket);
+            if (brackets === IND_MATCH) {
+              indVar.push(currentString);
+            } else if (brackets === DEP_MATCH) {
+              depVar.push(currentString);
+            } else if (brackets === CONST_MATCH) {
+              consts.push(currentString);
+            } else {
+              console.log("Error -- Bracket Mismatched.");
+            }
+            // Reset string 
+            currentString = ""
+            variableMode = false;
+          } 
+        } else {
+          var isBeginVariable = MATH_BEGIN.indexOf(currentChar) > -1;
+          if (isBeginVariable) {
+            pieces.push(currentString);
+            currentString = "";
+            currentString = currentString.concat(currentChar);
+            variableMode = true;
+          } else {
+            currentString = currentString.concat(currentChar);
+            var isLastChar = (i === (len -1));
+            if (isLastChar) {
+              pieces.push(currentString);
+            }
+          }
+        }
+      }
+
+      console.log("pieces: ", pieces);
+      console.log("ind var list: ", indVar);
+      console.log("dep var list: ", depVar);
+      console.log("consts list: ",consts);
+
+      // Variables to display pieces
+      $scope.piecesList = pieces;
+      $scope.indVarList = indVar;
+      $scope.depVarList = depVar;
+      $scope.constsList = consts;
+
+    };
+    };  
+    </script>
+    <br>
+    <br>
+    
+  </body>
+</html>
