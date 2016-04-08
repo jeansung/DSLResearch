@@ -1,5 +1,5 @@
 var editor = new Quill('#editor-container', {});
-  
+
 function textDisplayControl($scope) {
 $scope.getParseText = function() {
   var rawText = editor.getText();
@@ -67,11 +67,15 @@ $scope.getParseText = function() {
   console.log("dep var list: ", depVar);
   console.log("consts list: ",consts);
 
-  // Variables to display pieces
+  // Variables to display pieces, need to INIT object as null 
   $scope.piecesList = pieces;
   $scope.indVarList = indVar;
   $scope.depVarList = depVar;
   $scope.constsList = consts;
+
+  // Show the variables
+  $('#variableResults').show('slow');
+
 
 };
 }; 
