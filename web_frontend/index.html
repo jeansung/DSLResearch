@@ -2,6 +2,7 @@
 <html ng-app>
   <head>
     <title> EasyMath Demo</title>
+    <intercept-url pattern="/favicon.ico" access="ROLE_ANONYMOUS" />
     <!-- Quill text editor -->
     <link rel="stylesheet" type="text/css" href="styles/style.css">
     <link rel="stylesheet" type="text/css" media="all" href="styles/style2.css">
@@ -12,6 +13,7 @@
 
     <!-- dependencies (jquery, handlebars and bootstrap) -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.0/handlebars.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.0/handlebars.min.js"></script>
     <link type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"/>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
@@ -70,15 +72,15 @@
     <div id="defineVariables">
 
       <div id="ind_var"> 
-        <script type="text/javascript" src="javascript/ind_variable_definition.js"></script>
+        <script type="text/javascript" src="form/independent_variable/variable_definition.js"></script>
       </div>
 
       <div id="dep_var">
-        <script type="text/javascript" src="javascript/dep_variable_definition.js"></script>
+        <script type="text/javascript" src="form/dependent_variable/variable_definition.js"></script>
       </div>
 
       <div id="consts">
-      <script type="text/javascript" src="javascript/consts_variable_definition.js"></script>
+      <script type="text/javascript" src="form/constants/variable_definition.js"></script>
       </div>
 
     </div>

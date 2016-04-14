@@ -1,0 +1,31 @@
+{
+  "title": "Define your constants: ",
+  "type": "object",
+  "properties": {
+    "name": {
+        "type": "string",
+        "title": "Name",
+        "default": "Total revenue"
+    },
+    "macrotype": {
+      "type": "String",
+      "title": "Macrotype",
+      "enum": ["constant"]
+
+    },
+    "datavar": {
+      "type": "string",
+      "title": "Variable name",
+      "required": true              
+    },
+    "dataformat": {
+      "title": "data format",
+      "type": "string"           
+    },
+    "datavalue": {
+      "type": "integer",
+      "title": "data value",
+      "required": true
+    }
+  }
+}

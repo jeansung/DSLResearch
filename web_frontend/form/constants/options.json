@@ -1,0 +1,16 @@
+{
+  "fields": {
+  "name": {
+    "disabled":true
+    },
+    "macrotype": {
+      "type": "select",
+      "disabled":true,
+      "removeDefaultNone":true
+    },
+    "datavar":{
+      "disallowOnlyEmptySpaces": true,
+      "helper": "Enter a name for the constant, cannot be empty."
+    }
+  }
+}

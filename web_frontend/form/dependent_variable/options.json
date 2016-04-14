@@ -1,0 +1,53 @@
+{
+  "fields": {
+    "name": {
+      "disabled":true
+    },
+    "macrotype": {
+      "type": "select",
+      "disabled":true,
+      "removeDefaultNone":true
+    },
+    "microtype": {
+      "type": "select",
+      "removeDefaultNone":false,
+      "noneLabel":"--Select--",
+      "emptySelectFirst": true
+    
+    },
+    "datavar":{
+      "disallowOnlyEmptySpaces": true,
+      "helper": "Enter a name for the variable, cannot be empty."
+    },
+    "dataformat": {
+      "dependencies": {
+        "microtype": "NULL"
+      }
+    },
+    "backingvariable": {
+      "dependencies": {
+        "microtype": "TKSwitchPositiveNegative"
+      }
+    },
+    "positivetextvalue": {
+      "dependencies": {
+        "microtype": "TKSwitchPositiveNegative"
+      }
+    },
+    "negativetextvalue": {
+      "dependencies": {
+        "microtype": "TKSwitchPositiveNegative"
+      }
+    },
+    "isrecursive": {
+      "dependencies": {
+        "microtype": "TkSwitch"
+      }
+    },
+    "options": {
+      "dependencies": {
+        "microtype": "TkSwitch"
+      }
+    }
+  }
+}

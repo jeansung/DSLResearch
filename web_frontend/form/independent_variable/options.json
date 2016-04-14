@@ -1,0 +1,49 @@
+{
+      "fields": {
+        "name": {
+          "disabled":true
+        },
+        "macrotype": {
+          "type": "select",
+          "disabled":true,
+          "removeDefaultNone":true
+        },
+        "microtype": {
+          "type": "select",
+          "removeDefaultNone":false,
+          "noneLabel":"--Select--",
+          "emptySelectFirst": true
+        
+        },
+        "datavar":{
+          "disallowOnlyEmptySpaces": true,
+          "helper": "Enter a name for the variable, cannot be empty."
+        },
+        "datamin": {
+          "dependencies": {
+            "microtype": "TkAdjustable number"
+          }
+        },
+        "datamax": {
+          "dependencies": {
+            "microtype": "TkAdjustable number"
+          }
+        },
+        "datastep": {
+          "dependencies": {
+            "microtype": "TkAdjustable number"
+          }
+        },
+        "displaytext": {
+          "disabled":true,
+          "dependencies": {
+            "microtype": "TkAdjustable number"
+          }
+        },
+        "datavalues": {
+          "dependencies": {
+            "microtype": "TkToggle TkSwitch"
+          }
+        }
+      }
+    }
