@@ -25,6 +25,11 @@
           "title": "Variable name",
           "required": true              
         },
+        "data_value": {
+          "type": "integer",
+          "title": "data value",
+          "required": true
+          },
         "dataformat": {
           "title": "data format",
           "type": "string"           
@@ -57,6 +62,7 @@
     },
     "dependencies": {
       "dataformat": ["microtype"],
+      "data_value":["microtype"],
       "backingvariable": ["microtype"],
       "positivetextvalue": ["microtype"],
       "negativetextvalue": ["microtype"], 

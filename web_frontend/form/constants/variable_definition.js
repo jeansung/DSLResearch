@@ -1,4 +1,5 @@
 $("#consts").alpaca({
+    "dataSource": "/form/constants/data.json",
     "schemaSource": "/form/constants/schema.json",
     "optionsSource": "/form/constants/options.json",
     "options": {

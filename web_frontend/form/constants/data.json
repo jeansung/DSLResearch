@@ -1,0 +1,6 @@
+{
+  "name": "Total revenue",
+  "macrotype": "constant",
+  "datavar": "totalRevConst",
+  "datavalue": 123456
+}

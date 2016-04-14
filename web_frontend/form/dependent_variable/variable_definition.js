@@ -1,4 +1,5 @@
 $("#dep_var").alpaca({
+    "dataSource": "/form/dependent_variable/data.json",
     "schemaSource": "/form/dependent_variable/schema.json",
     "optionsSource": "/form/dependent_variable/options.json",
     "options": {

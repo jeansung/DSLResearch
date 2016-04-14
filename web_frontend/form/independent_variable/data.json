@@ -1,0 +1,7 @@
+{
+  "name": "tax",
+  "macrotype": "independent variable",
+  "microtype": "TkToggle TkSwitch",
+  "datavar": "taxVariable",
+  "datavalues": "1,2,3,4"
+}

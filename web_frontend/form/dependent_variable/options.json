@@ -19,6 +19,12 @@
       "disallowOnlyEmptySpaces": true,
       "helper": "Enter a name for the variable, cannot be empty."
     },
+    "data_value": {
+      "dependencies": {
+        "microtype": "NULL"
+      }
+
+      },
     "dataformat": {
       "dependencies": {
         "microtype": "NULL"
