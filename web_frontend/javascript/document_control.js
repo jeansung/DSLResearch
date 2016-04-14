@@ -1,4 +1,4 @@
 $(document).ready(function(){
   $('#variableResults').hide('fast');
-  $('#defineVariables').hide('fast');
+  $('#variableDefinition').hide('fast');
 });
