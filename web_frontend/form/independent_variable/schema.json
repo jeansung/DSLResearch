@@ -4,8 +4,8 @@
     "properties": {
         "name": {
             "type": "string",
-            "title": "Name",
-            "default": "tax"
+            "title": "Name"
+            
         },
         "macrotype": {
           "type": "String",

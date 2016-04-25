@@ -4,8 +4,7 @@
     "properties": {
         "name": {
             "type": "string",
-            "title": "Name",
-            "default": "Total revenue"
+            "title": "Name"
         },
         "macrotype": {
           "type": "String",

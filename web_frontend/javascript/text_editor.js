@@ -22,6 +22,12 @@ $scope.getParseText = function() {
   var depVar = [];
   var consts = [];
 
+
+  $scope.indVarDef = {};
+  $scope.depVarDef = {};
+  $scope.constDef = {};
+
+
   for (var i = 0, len = rawText.length; i < len; i++) {
     currentChar = rawText[i];
     if (variableMode) {
@@ -62,20 +68,101 @@ $scope.getParseText = function() {
     }
   }
 
-  console.log("pieces: ", pieces);
-  console.log("ind var list: ", indVar);
-  console.log("dep var list: ", depVar);
-  console.log("consts list: ",consts);
 
-  // Variables to display pieces, need to INIT object as null 
+
+  // Variables to display pieces, need to INIT object as null
+  // List of names : {object definition} 
+
   $scope.piecesList = pieces;
+
+    for (var i = 0, len = indVar.length; i < len; i++)  {
+    var currentObject = {
+      "name": indVar[i],
+      "object": {}
+    };
+    $scope.indVarDef[indVar[i]] = currentObject;
+  }
   $scope.indVarList = indVar;
+
+  for (var j = 0, len = depVar.length; j < len; j++)  {
+    var currentObject = {
+      "name": depVar[j],
+      "object": {}
+    };
+    $scope.depVarDef[depVar[j]] = currentObject;
+  }
   $scope.depVarList = depVar;
+
+    for (var k = 0, len = consts.length; k < len; k++)  {
+    var currentObject = {
+      "name": consts[k],
+      "object": {}
+    };
+    $scope.constDef[consts[k]] = currentObject;
+  }
   $scope.constsList = consts;
+
 
   // Show the variables
   $('#variableResults').show('slow');
 
 
 };
+
+$scope.loadForVariable = function(variableName, variableType) {
+  var schemaSourceLink = "";
+  var optionsSourceLink = "";
+  var dataObject = {};
+
+  
+  if (variableType === "ind") {
+    schemaSourceLink = "/form/independent_variable/schema.json";
+    optionsSourceLink = "/form/independent_variable/options.json";
+    dataObject = $scope.indVarDef[variableName];
+
+  } else if (variableType == "dep") {
+    schemaSourceLink = "/form/dependent_variable/schema.json";
+    optionsSourceLink ="/form/independent_variable/options.json";
+    dataObject = $scope.depVarDef[variableName];
+
+  } else {
+    schemaSourceLink = "/form/constants/schema.json";
+    optionsSourceLink = "/form/constants/options.json";
+    dataObject = $scope.constDef[variableName];
+  }
+ 
+
+  $scope.loadForm(dataObject, schemaSourceLink, optionsSourceLink);
+  $('#defineVariables').show('slow');
+
+};
+
+
+$scope.loadForm = function (dataObject, schemaSourceLink, optionsSourceLink) {
+  $("#defineVariables").alpaca({
+    "schemaSource": schemaSourceLink,
+    "optionsSource": optionsSourceLink,
+    "data": dataObject,
+    "options": {
+        "form": {
+        "buttons": {
+          "submit": {
+              "title": "Serialize",
+              "click": function() {
+                  var value = this.getValue();
+                  console.log()
+                  console.log(value);
+                  alert(JSON.stringify(value, null, "  "));
+              }
+          }
+        }
+      },
+  }
+});
+};
+
+
+
+
+
 }; 
