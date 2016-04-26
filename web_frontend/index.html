@@ -48,8 +48,8 @@
 
     <div id= "variableResults" class="repolist clearfix">
       <h2> Constants </h2>
-      <ul ng-repeat="k in constsList">
-         <li><a href="#" ng-click="loadForVariable(k, 'const')"> {{k}} </a></li>
+      <ul ng-repeat="i in consts">
+         <li><a href="#" ng-click="loadForVariable(i, 'const')"> {{i}} </a></li>
       </ul>
 
       <br>
@@ -57,23 +57,22 @@
 
 
       <h2> Independent Variables </h2>
-      <ul ng-repeat="i in indVarList">
-         <li><a href="#"  ng-click="loadForVariable(i, 'ind')"> {{i}} </a></li>
+      <ul ng-repeat="j in indVar">
+         <li><a href="#"  ng-click="loadForVariable(j, 'ind')"> {{j}} </a></li>
       </ul>
 
       <br> 
       <br>
 
       <h2> Dependent Variables </h2>
-      <ul ng-repeat="j in depVarList">
-       <li><a href="#" ng-click="loadForVariable(j, 'dep')">  {{j}} </a></li>
+      <ul ng-repeat="k in depVar">
+       <li><a href="#" ng-click="loadForVariable(k, 'dep')">  {{k}} </a></li>
       </ul>
     </div>
 
     <!-- Define Variables  -->
-    <div id="defineVariables">
     <!-- Form goes here  -->
-
+    <div id="defineVariables">
     </div>
    
     

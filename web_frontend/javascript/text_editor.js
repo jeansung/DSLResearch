@@ -17,11 +17,10 @@ $scope.getParseText = function() {
   var variableMode = false;
 
   // Variables that contain the pieces after processing
-  var pieces = [];
-  var indVar = [];
-  var depVar = [];
-  var consts = [];
-
+  $scope.pieces = [];
+  $scope.indVar = [];
+  $scope.depVar = []; 
+  $scope.consts = [];
 
   $scope.indVarDef = {};
   $scope.depVarDef = {};
@@ -34,16 +33,16 @@ $scope.getParseText = function() {
       currentString = currentString.concat(currentChar);
       var isEndVariable = MATH_END.indexOf(currentChar) > -1;
       if (isEndVariable) {
-        pieces.push(currentString);
+        $scope.pieces.push(currentString);
         var beginBracket = currentString[0];
         var endBracket = currentString[currentString.length-1];
         var brackets = beginBracket.concat(endBracket);
         if (brackets === IND_MATCH) {
-          indVar.push(currentString);
+          $scope.indVar.push(currentString);
         } else if (brackets === DEP_MATCH) {
-          depVar.push(currentString);
+          $scope.depVar.push(currentString);
         } else if (brackets === CONST_MATCH) {
-          consts.push(currentString);
+          $scope.consts.push(currentString);
         } else {
           console.log("Error -- Bracket Mismatched.");
         }
@@ -54,7 +53,7 @@ $scope.getParseText = function() {
     } else {
       var isBeginVariable = MATH_BEGIN.indexOf(currentChar) > -1;
       if (isBeginVariable) {
-        pieces.push(currentString);
+        $scope.pieces.push(currentString);
         currentString = "";
         currentString = currentString.concat(currentChar);
         variableMode = true;
@@ -62,7 +61,7 @@ $scope.getParseText = function() {
         currentString = currentString.concat(currentChar);
         var isLastChar = (i === (len -1));
         if (isLastChar) {
-          pieces.push(currentString);
+          $scope.pieces.push(currentString);
         }
       }
     }
@@ -73,34 +72,29 @@ $scope.getParseText = function() {
   // Variables to display pieces, need to INIT object as null
   // List of names : {object definition} 
 
-  $scope.piecesList = pieces;
-
-    for (var i = 0, len = indVar.length; i < len; i++)  {
+    for (var i = 0, len = $scope.indVar.length; i < len; i++)  {
     var currentObject = {
-      "name": indVar[i],
+      "name": $scope.indVar[i],
       "object": {}
     };
-    $scope.indVarDef[indVar[i]] = currentObject;
+    $scope.indVarDef[$scope.indVar[i]] = currentObject;
   }
-  $scope.indVarList = indVar;
 
-  for (var j = 0, len = depVar.length; j < len; j++)  {
+  for (var j = 0, len = $scope.depVar.length; j < len; j++)  {
     var currentObject = {
-      "name": depVar[j],
+      "name": $scope.depVar[j],
       "object": {}
     };
-    $scope.depVarDef[depVar[j]] = currentObject;
+    $scope.depVarDef[$scope.depVar[j]] = currentObject;
   }
-  $scope.depVarList = depVar;
 
-    for (var k = 0, len = consts.length; k < len; k++)  {
+    for (var k = 0, len = $scope.consts.length; k < len; k++)  {
     var currentObject = {
-      "name": consts[k],
+      "name": $scope.consts[k],
       "object": {}
     };
-    $scope.constDef[consts[k]] = currentObject;
+    $scope.constDef[$scope.consts[k]] = currentObject;
   }
-  $scope.constsList = consts;
 
 
   // Show the variables
@@ -172,10 +166,5 @@ $scope.saveForm = function(newData, variableName, variableType) {
     $scope.constDef[variableName] = newData;
   }
 };
-
-
-
-
-
 
 }; 
