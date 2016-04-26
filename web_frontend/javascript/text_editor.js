@@ -110,7 +110,6 @@ $scope.getParseText = function() {
 };
 
 $scope.loadForVariable = function(variableName, variableType) {
-  console.log("Call to reload a new variable");
   var schemaSourceLink = "";
   var optionsSourceLink = "";
   var dataObject = {};
@@ -132,17 +131,15 @@ $scope.loadForVariable = function(variableName, variableType) {
     dataObject = $scope.constDef[variableName];
   }
 
-  console.log("Making the call to reload the form:");
+  // Remove old form values before new forms 
   $("#defineVariables").alpaca("destroy");
   $scope.loadForm(dataObject, schemaSourceLink, optionsSourceLink);
-  console.log("After call to reload form");
   $('#defineVariables').show('slow');
 
 };
 
 
 $scope.loadForm = function (dataObject, schemaSourceLink, optionsSourceLink) {
-  console.log("Beging loadForm function");
   $("#defineVariables").alpaca({
     "schemaSource": schemaSourceLink,
     "optionsSource": optionsSourceLink,
@@ -161,17 +158,7 @@ $scope.loadForm = function (dataObject, schemaSourceLink, optionsSourceLink) {
         }
       },
   },
-  // "postRender": function(dataObject) {
-  //   var control = $("#defineVariables").alpaca("get");
-  //   console.log("Reloading");
-  //   control.refresh(function() {
-  //     console.log(dataObject);
-  //     console.log("Refreshed!");
-
-  //   });
-  // }
 });
-  console.log("End of loadForm function");
 };
 
 
