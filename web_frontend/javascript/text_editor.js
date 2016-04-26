@@ -116,7 +116,7 @@ $scope.loadForVariable = function(variableName, variableType) {
 
   } else if (variableType == "dep") {
     schemaSourceLink = "/form/dependent_variable/schema.json";
-    optionsSourceLink ="/form/independent_variable/options.json";
+    optionsSourceLink ="/form/dependent_variable/options.json";
     dataObject = $scope.depVarDef[variableName];
 
   } else {
