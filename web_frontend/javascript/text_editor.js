@@ -133,13 +133,14 @@ $scope.loadForVariable = function(variableName, variableType) {
 
   // Remove old form values before new forms 
   $("#defineVariables").alpaca("destroy");
-  $scope.loadForm(dataObject, schemaSourceLink, optionsSourceLink);
+  $scope.loadForm(dataObject, schemaSourceLink, optionsSourceLink, variableName, variableType);
   $('#defineVariables').show('slow');
 
 };
 
 
-$scope.loadForm = function (dataObject, schemaSourceLink, optionsSourceLink) {
+$scope.loadForm = function (dataObject, schemaSourceLink, optionsSourceLink,
+                            variableName, variableType) {
   $("#defineVariables").alpaca({
     "schemaSource": schemaSourceLink,
     "optionsSource": optionsSourceLink,
@@ -151,7 +152,7 @@ $scope.loadForm = function (dataObject, schemaSourceLink, optionsSourceLink) {
               "title": "Serialize",
               "click": function() {
                   var value = this.getValue();
-                  console.log(value);
+                  $scope.saveForm(value, variableName, variableType);
                   alert(JSON.stringify(value, null, "  "));
               }
           }
@@ -170,7 +171,6 @@ $scope.saveForm = function(newData, variableName, variableType) {
   } else {
     $scope.constDef[variableName] = newData;
   }
- 
 };
 
 
