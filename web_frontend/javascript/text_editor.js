@@ -110,6 +110,7 @@ $scope.getParseText = function() {
 };
 
 $scope.loadForVariable = function(variableName, variableType) {
+  console.log("Call to reload a new variable");
   var schemaSourceLink = "";
   var optionsSourceLink = "";
   var dataObject = {};
@@ -130,15 +131,18 @@ $scope.loadForVariable = function(variableName, variableType) {
     optionsSourceLink = "/form/constants/options.json";
     dataObject = $scope.constDef[variableName];
   }
- 
 
+  console.log("Making the call to reload the form:");
+  $("#defineVariables").alpaca("destroy");
   $scope.loadForm(dataObject, schemaSourceLink, optionsSourceLink);
+  console.log("After call to reload form");
   $('#defineVariables').show('slow');
 
 };
 
 
 $scope.loadForm = function (dataObject, schemaSourceLink, optionsSourceLink) {
+  console.log("Beging loadForm function");
   $("#defineVariables").alpaca({
     "schemaSource": schemaSourceLink,
     "optionsSource": optionsSourceLink,
@@ -150,16 +154,38 @@ $scope.loadForm = function (dataObject, schemaSourceLink, optionsSourceLink) {
               "title": "Serialize",
               "click": function() {
                   var value = this.getValue();
-                  console.log()
                   console.log(value);
                   alert(JSON.stringify(value, null, "  "));
               }
           }
         }
       },
-  }
+  },
+  // "postRender": function(dataObject) {
+  //   var control = $("#defineVariables").alpaca("get");
+  //   console.log("Reloading");
+  //   control.refresh(function() {
+  //     console.log(dataObject);
+  //     console.log("Refreshed!");
+
+  //   });
+  // }
 });
+  console.log("End of loadForm function");
 };
+
+
+$scope.saveForm = function(newData, variableName, variableType) {
+  if (variableType === "ind") {
+    $scope.indVarDef[variableName] = newData;
+  } else if (variableType == "dep") {
+    $scope.depVarDef[variableName] = newData;
+  } else {
+    $scope.constDef[variableName] = newData;
+  }
+ 
+};
+
 
 
 
