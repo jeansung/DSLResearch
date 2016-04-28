@@ -171,7 +171,7 @@ $scope.saveForm = function(newData, variableName, variableType) {
 
   var isReady = $scope.checkReadyToRender();
   if (isReady) {
-    console.log("READY");
+    $('#downloadHTML').show('slow');
   }
   
 };
@@ -210,10 +210,19 @@ $scope.checkReadyToRender = function() {
   }
 
   return true;
-}
+};
 
 // Assemble the HTML option
 $scope.renderHTMLOption = function () {
 
-}
+  var endHTML = $scope.assembleHTMLPage();
+  var blob = new Blob([endHTML], {type: "text/plain;charset=utf-8"});
+  saveAs(blob, "hello world.html");
+
+};
+
+
+$scope.assembleHTMLPage = function() {
+  return "hello world";
+};
 }; 
