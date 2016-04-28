@@ -1,4 +1,5 @@
 var editor = new Quill('#editor-container', {});
+var readyToRender = false;
 
 function textDisplayControl($scope) {
 $scope.getParseText = function() {
@@ -96,9 +97,11 @@ $scope.getParseText = function() {
     $scope.constDef[$scope.consts[k]] = currentObject;
   }
 
-
   // Show the variables
   $('#variableResults').show('slow');
+
+  // Initialize ready to render as false
+  readyToRender = false;
 
 
 };
@@ -143,11 +146,11 @@ $scope.loadForm = function (dataObject, schemaSourceLink, optionsSourceLink,
         "form": {
         "buttons": {
           "submit": {
-              "title": "Serialize",
+              "title": "Save",
               "click": function() {
                   var value = this.getValue();
                   $scope.saveForm(value, variableName, variableType);
-                  alert(JSON.stringify(value, null, "  "));
+                  alert(JSON.stringify(value, null, " "));
               }
           }
         }
@@ -165,6 +168,52 @@ $scope.saveForm = function(newData, variableName, variableType) {
   } else {
     $scope.constDef[variableName] = newData;
   }
+
+  var isReady = $scope.checkReadyToRender();
+  if (isReady) {
+    console.log("READY");
+  }
+  
 };
 
+$scope.checkReadyToRender = function() {
+  var minLength = 2;
+
+  for (var i = 0, len = $scope.indVar.length; i < len; i++) {
+    var itemIndex = $scope.indVar[i];
+    var internalObject = $scope.indVarDef[itemIndex]
+    var objectLength = Object.keys(internalObject).length;
+    if (objectLength <= minLength) {
+      // empty case
+      return false;
+    }
+  }
+
+  for (var j = 0, len = $scope.depVar.length; j < len; j++) {
+    var itemIndex = $scope.depVar[j];
+    var internalObject = $scope.depVarDef[itemIndex]
+    var objectLength = Object.keys(internalObject).length;
+    if (objectLength <= minLength) {
+      // empty case
+      return false;
+    }
+  }
+
+  for (var k = 0, len = $scope.consts.length; k < len; k++) {
+    var itemIndex = $scope.consts[k];
+    var internalObject = $scope.constDef[itemIndex]
+    var objectLength = Object.keys(internalObject).length;
+    if (objectLength <= minLength) {
+      // empty case
+      return false;
+    }
+  }
+
+  return true;
+}
+
+// Assemble the HTML option
+$scope.renderHTMLOption = function () {
+
+}
 }; 
