@@ -150,7 +150,7 @@ $scope.loadForm = function (dataObject, schemaSourceLink, optionsSourceLink,
               "click": function() {
                   var value = this.getValue();
                   $scope.saveForm(value, variableName, variableType);
-                  alert(JSON.stringify(value, null, " "));
+                  //alert(JSON.stringify(value, null, " "));
               }
           }
         }
@@ -215,14 +215,57 @@ $scope.checkReadyToRender = function() {
 // Assemble the HTML option
 $scope.renderHTMLOption = function () {
 
-  var endHTML = $scope.assembleHTMLPage();
-  var blob = new Blob([endHTML], {type: "text/plain;charset=utf-8"});
+  var constructedBody = $scope.assembleHTMLPage();
+
+
+
+  var result="";   
+  //jQuery.ajaxSetup({async:false});  
+  //$.get(").done(function(data) {result=data});
+  $.ajax({
+  url: "output_template.html",
+  success: function(data) {result=data},
+  dataType: "html",
+  async: false,
+  });
+  console.log(result);
+
+  var finalHTML = result.replace("${body}", constructedBody);
+
+
+
+  var blob = new Blob([finalHTML], {type: "text/plain;charset=utf-8"});
   saveAs(blob, "hello world.html");
 
 };
 
 
 $scope.assembleHTMLPage = function() {
-  return "hello world";
+  var data = {
+    name: 'AbsurdJS',
+    features: ['CSS preprocessor', 'HTML preprocessor', 'Organic CSS'],
+    link: function() {
+        return '<a href="http://absurdjs.com">' + this.name + '</a>';
+    }
+  }
+
+  var absurd = Absurd();
+  var html = absurd.morph("html").add({
+      body: {
+          h1: 'I\'m <% this.name %>!',
+          section: {
+              ul: [
+                  '<% for(var i=0; i<this.features.length; i++) { %>',
+                  { li: '<% this.features[i] %>' },
+                  '<% } %>'
+              ]
+          },
+          footer: 'Checkout my website at <% this.link() %>'
+      }
+  }).compile(function(err, html) {
+      console.log(html);
+  }, data);
+
+  return html;
 };
 }; 
