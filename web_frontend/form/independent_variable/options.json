@@ -8,41 +8,34 @@
           "disabled":true,
           "removeDefaultNone":true
         },
-        "microtype": {
+        "class": {
           "type": "select",
           "removeDefaultNone":false,
           "noneLabel":"--Select--",
           "emptySelectFirst": true
-        
         },
-        "datavar":{
+        "data-var":{
           "disallowOnlyEmptySpaces": true,
           "helper": "Enter a name for the variable, cannot be empty."
         },
-        "datamin": {
+        "data-min": {
           "dependencies": {
-            "microtype": "TkAdjustable number"
+            "class": "TkAdjustable number"
           }
         },
-        "datamax": {
+        "data-max": {
           "dependencies": {
-            "microtype": "TkAdjustable number"
+            "class": "TkAdjustable number"
           }
         },
-        "datastep": {
+        "data-step": {
           "dependencies": {
-            "microtype": "TkAdjustable number"
+            "class": "TkAdjustable number"
           }
         },
-        "displaytext": {
-          "disabled":true,
+        "data-values": {
           "dependencies": {
-            "microtype": "TkAdjustable number"
-          }
-        },
-        "datavalues": {
-          "dependencies": {
-            "microtype": "TkToggle TkSwitch"
+            "class": "TkToggle TkSwitch"
           }
         }
       }

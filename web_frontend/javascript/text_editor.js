@@ -68,6 +68,8 @@ $scope.getParseText = function() {
     }
   }
 
+  console.log("pieces at the end of creation: ", $scope.pieces);
+
 
 
   // Variables to display pieces, need to INIT object as null
@@ -130,6 +132,7 @@ $scope.loadForVariable = function(variableName, variableType) {
 
   // Remove old form values before new forms 
   $("#defineVariables").alpaca("destroy");
+  console.log("About to render the form!");
   $scope.loadForm(dataObject, schemaSourceLink, optionsSourceLink, variableName, variableType);
   $('#defineVariables').show('slow');
 
@@ -138,6 +141,7 @@ $scope.loadForVariable = function(variableName, variableType) {
 
 $scope.loadForm = function (dataObject, schemaSourceLink, optionsSourceLink,
                             variableName, variableType) {
+  console.log("SRSLY!!!")
   $("#defineVariables").alpaca({
     "schemaSource": schemaSourceLink,
     "optionsSource": optionsSourceLink,
@@ -161,6 +165,7 @@ $scope.loadForm = function (dataObject, schemaSourceLink, optionsSourceLink,
 
 
 $scope.saveForm = function(newData, variableName, variableType) {
+  console.log("pieces when I am saving the form: ", $scope.pieces);
   if (variableType === "ind") {
     $scope.indVarDef[variableName] = newData;
   } else if (variableType == "dep") {
@@ -215,6 +220,8 @@ $scope.checkReadyToRender = function() {
 // Assemble the HTML option
 $scope.renderHTMLOption = function () {
 
+
+
   var constructedBody = $scope.assembleHTMLPage();
 
 
@@ -228,7 +235,7 @@ $scope.renderHTMLOption = function () {
   dataType: "html",
   async: false,
   });
-  console.log(result);
+  //console.log(result);
 
   var finalHTML = result.replace("${body}", constructedBody);
 
@@ -241,29 +248,69 @@ $scope.renderHTMLOption = function () {
 
 
 $scope.assembleHTMLPage = function() {
+
+  // use the indVardef
+  // use the depVarDef
+  // use the consts def 
+
+  console.log("ind", $scope.indVarDef);
+  console.log("dep", $scope.depVarDef);
+  console.log("consts", $scope.constDef);
+
+  // var data = {
+  //   name: 'AbsurdJS',
+  //   features: ['CSS preprocessor', 'HTML preprocessor', 'Organic CSS'],
+  //   link: function() {
+  //       return '<a href="http://absurdjs.com">' + this.name + '</a>';
+  //   }
+  // }
+
+  // var absurd = Absurd();
+  // var html = absurd.morph("html").add({
+  //     body: {
+  //         h1: 'I\'m <% this.name %>!',
+  //         section: {
+  //             ul: [
+  //                 '<% for(var i=0; i<this.features.length; i++) { %>',
+  //                 { li: '<% this.features[i] %>' },
+  //                 '<% } %>'
+  //             ]
+  //         },
+  //         footer: 'Checkout my website at <% this.link() %>'
+  //     }
+  // }).compile(function(err, html) {
+  //     console.log(html);
+  // }, data);
+
+  console.log("Right before rendering.", $scope.pieces);
+
+
   var data = {
-    name: 'AbsurdJS',
-    features: ['CSS preprocessor', 'HTML preprocessor', 'Organic CSS'],
-    link: function() {
-        return '<a href="http://absurdjs.com">' + this.name + '</a>';
-    }
+    name: 'Sample page!',
+    pieces: $scope.pieces,
+    indList: $scope.indVar, 
+    indDef: $scope.indVarDef, 
+    depList: $scope.depVar,
+    depDef: $scope.depVarDef,
+    constList: $scope.consts,
+    constDef: $scope.constDef
   }
 
   var absurd = Absurd();
   var html = absurd.morph("html").add({
       body: {
-          h1: 'I\'m <% this.name %>!',
-          section: {
-              ul: [
-                  '<% for(var i=0; i<this.features.length; i++) { %>',
-                  { li: '<% this.features[i] %>' },
-                  '<% } %>'
-              ]
-          },
-          footer: 'Checkout my website at <% this.link() %>'
+          p: "<% for (var i=0; i \< this.pieces.length; i++) { %>" +
+"<% var item = this.pieces[i]; %>" +
+"<% var lastIndex = item.length; %>" +
+"<% var varString = item.substring(1, lastIndex-1); %>" +
+"<% if (indList.indexOf(item) \>= 0) { %>" +
+"<% var currentDef = indDef['varString']; %>" +
+"<% } %>" +
+"<% } %>" 
       }
   }).compile(function(err, html) {
-      console.log(html);
+      console.log("Error: ", err);
+      console.log("HTML: ", html);
   }, data);
 
   return html;

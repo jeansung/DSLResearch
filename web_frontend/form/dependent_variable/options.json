@@ -8,44 +8,44 @@
       "disabled":true,
       "removeDefaultNone":true
     },
-    "microtype": {
+    "class": {
       "type": "select",
       "removeDefaultNone":false,
       "noneLabel":"--Select--",
       "emptySelectFirst": true
     
     },
-    "datavar":{
+    "data-var":{
       "disallowOnlyEmptySpaces": true,
       "helper": "Enter a name for the variable, cannot be empty."
     },
-    "data_value": {
+    "data-value": {
       "dependencies": {
         "microtype": "NULL"
       }
 
       },
-    "dataformat": {
+    "data-format": {
       "dependencies": {
         "microtype": "NULL"
       }
     },
-    "backingvariable": {
+    "backing_variable": {
       "dependencies": {
         "microtype": "TKSwitchPositiveNegative"
       }
     },
-    "positivetextvalue": {
+    "positive": {
       "dependencies": {
         "microtype": "TKSwitchPositiveNegative"
       }
     },
-    "negativetextvalue": {
+    "negative": {
       "dependencies": {
         "microtype": "TKSwitchPositiveNegative"
       }
     },
-    "isrecursive": {
+    "isRecursive": {
       "dependencies": {
         "microtype": "TkSwitch"
       }

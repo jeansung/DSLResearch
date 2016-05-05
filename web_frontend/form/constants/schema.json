@@ -12,16 +12,16 @@
       "enum": ["constant"]
 
     },
-    "datavar": {
+    "data-var": {
       "type": "string",
       "title": "Variable name",
       "required": true              
     },
-    "dataformat": {
+    "data-format": {
       "title": "data format",
       "type": "string"           
     },
-    "datavalue": {
+    "data-value": {
       "type": "integer",
       "title": "data value",
       "required": true

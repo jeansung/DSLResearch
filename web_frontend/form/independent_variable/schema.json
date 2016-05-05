@@ -13,49 +13,43 @@
           "enum": ["independent variable"]
 
         },
-        "microtype": {
+        "class": {
             "type": "String",
             "title": "Microtype",
             "enum": ["TkAdjustable number", "TkToggle TkSwitch"],
             "required": true 
 
         },
-        "datavar": {
+        "data-var": {
           "type": "string",
           "title": "Variable name",
           "required": true              
         },
-        "datamin": {
+        "data-min": {
           "title": "data min",
           "type": "integer",
           "required": true
         
         },
-        "datamax": {
+        "data-max": {
           "type": "integer",
           "title": "data max",
           "required": true
         },
-        "datastep": {
+        "data-step": {
           "type": "integer", 
           "title": "data step", 
           "default":  1
         },
-        "displaytext": {
-          "type": "string", 
-          "title": "display text",
-          "default": ""
-        },
-        "datavalues": {
+        "data-values": {
           "type": "string", 
           "title": "data values"
         }
     },
     "dependencies": {
-      "datamin": ["microtype"],
-      "datamax": ["microtype"],
-      "datastep": ["microtype"],
-      "displaytext": ["microtype"], 
-      "datavalues": ["microtype"]
+      "data-min": ["class"],
+      "data-max": ["class"],
+      "data-step": ["class"],
+      "data-values": ["class"]
     }
 }

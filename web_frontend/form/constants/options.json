@@ -8,7 +8,7 @@
       "disabled":true,
       "removeDefaultNone":true
     },
-    "datavar":{
+    "data-var":{
       "disallowOnlyEmptySpaces": true,
       "helper": "Enter a name for the constant, cannot be empty."
     }

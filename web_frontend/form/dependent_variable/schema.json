@@ -12,45 +12,45 @@
           "enum": ["dependent variable"]
 
         },
-        "microtype": {
+        "class": {
             "type": "String",
             "title": "Microtype",
             "enum": ["NULL", "TKSwitchPositiveNegative", "TkSwitch"],
             "required": true 
 
         },
-        "datavar": {
+        "data-var": {
           "type": "string",
           "title": "Variable name",
           "required": true              
         },
-        "data_value": {
+        "data-value": {
           "type": "integer",
           "title": "data value",
           "required": true
           },
-        "dataformat": {
+        "data-format": {
           "title": "data format",
           "type": "string"           
         },
-        "backingvariable": {
+        "backing_variable": {
           "type": "string",
           "title": "backing variable",
           "required": true
         },
-        "positivetextvalue": {
+        "positive": {
           "type": "string", 
           "title": "Positive text value", 
           "required": true
           
         },
-        "negativetextvalue": {
+        "negative": {
           "type": "string", 
           "title": "Negative text value", 
           "required": true
           
         },
-        "isrecursive": {
+        "isRecursive": {
           "type": "boolean", 
           "title": "Is recursive?"
         },
@@ -60,12 +60,12 @@
         }
     },
     "dependencies": {
-      "dataformat": ["microtype"],
-      "data_value":["microtype"],
-      "backingvariable": ["microtype"],
-      "positivetextvalue": ["microtype"],
-      "negativetextvalue": ["microtype"], 
-      "isrecursive": ["microtype"],
-      "options": ["microtype"]
+      "data-format": ["class"],
+      "data-value":["class"],
+      "backing_variable": ["class"],
+      "positive": ["class"],
+      "negative": ["class"], 
+      "isRecursive": ["class"],
+      "options": ["class"]
     }
 }
