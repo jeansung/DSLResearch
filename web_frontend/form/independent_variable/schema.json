@@ -41,6 +41,12 @@
           "title": "data step", 
           "default":  1
         },
+
+        "data-format": {
+          "type": "integer", 
+          "title": "data format", 
+          "default": ""
+        },
         "data-values": {
           "type": "string", 
           "title": "data values"
