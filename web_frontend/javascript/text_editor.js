@@ -141,7 +141,6 @@ $scope.loadForVariable = function(variableName, variableType) {
 
 $scope.loadForm = function (dataObject, schemaSourceLink, optionsSourceLink,
                             variableName, variableType) {
-  console.log("SRSLY!!!")
   $("#defineVariables").alpaca({
     "schemaSource": schemaSourceLink,
     "optionsSource": optionsSourceLink,
@@ -154,7 +153,6 @@ $scope.loadForm = function (dataObject, schemaSourceLink, optionsSourceLink,
               "click": function() {
                   var value = this.getValue();
                   $scope.saveForm(value, variableName, variableType);
-                  //alert(JSON.stringify(value, null, " "));
               }
           }
         }
@@ -257,32 +255,8 @@ $scope.assembleHTMLPage = function() {
   console.log("dep", $scope.depVarDef);
   console.log("consts", $scope.constDef);
 
-  // var data = {
-  //   name: 'AbsurdJS',
-  //   features: ['CSS preprocessor', 'HTML preprocessor', 'Organic CSS'],
-  //   link: function() {
-  //       return '<a href="http://absurdjs.com">' + this.name + '</a>';
-  //   }
-  // }
-
-  // var absurd = Absurd();
-  // var html = absurd.morph("html").add({
-  //     body: {
-  //         h1: 'I\'m <% this.name %>!',
-  //         section: {
-  //             ul: [
-  //                 '<% for(var i=0; i<this.features.length; i++) { %>',
-  //                 { li: '<% this.features[i] %>' },
-  //                 '<% } %>'
-  //             ]
-  //         },
-  //         footer: 'Checkout my website at <% this.link() %>'
-  //     }
-  // }).compile(function(err, html) {
-  //     console.log(html);
-  // }, data);
-
   console.log("Right before rendering.", $scope.pieces);
+  console.log($scope.indVar);
 
 
   var data = {
@@ -293,26 +267,114 @@ $scope.assembleHTMLPage = function() {
     depList: $scope.depVar,
     depDef: $scope.depVarDef,
     constList: $scope.consts,
-    constDef: $scope.constDef
-  }
+    constDef: $scope.constDef,
 
+    createTKAdjustableNumber: function(currentDef) {
+      return '<span ' +
+              'data-var='    + '\"' + currentDef['data-var'] + '\"' +
+              ' class= \"TKAdjustableNumber\"'               +
+              ' data-min='   + '\"' + currentDef['data-min'] + '\"' +
+              ' data-max='   + '\"' + currentDef['data-max'] + '\"' +
+              ' data-step='  + '\"' + currentDef['data-step'] + '\"' +
+              ' data-format='+ '\"' + currentDef['data-format'] + '\"' +
+              ' ></span>';
+    },
+
+    createTKToggleSwitch: function(currentDef) {
+      var starterString = "<span "+
+      " data-var=" + "\"" + currentDef['data-var'] + '\"' + 
+      ' class=\"TKToggle TKSwitch\"';
+      var textOptionsString = currentDef['data-values'];
+      var textOptionsArray = textOptionsString.split("//");
+      var optionsString = "";
+      for (var i = 0; i < textOptionsArray.length; i++) {
+        var currentTextOption = "<span> " + textOptionsArray[i] + "</span>";
+        optionsString = optionsString.concat(currentTextOption);
+      }
+      var endString = "</span>";
+      return starterString.concat(optionsString, endString);
+    },
+
+    createTKSwitchPositiveNegative: function(currentDef) {
+      return "<span " +
+      "data-var=" + "\"" + currentDef['data-var'] + '\"' + 
+      'class= \"TKSwitchPositiveNegative\"' +
+      ">" + 
+      "<span> " + currentDef['positive'] + '</span>' + 
+      "<span> " + currentDef['negative'] + '</span>' +
+      "</span>"; 
+    },
+
+    createTKSwitch: function(currentDef) {
+      // TODO: Add recursive support 
+      var starterString = "<span " +
+      "data-var=" + '\"' + currentDef['data-var'] + '\"' +
+      'class= \"TKSwitch\"' +
+      ">";
+      var textOptionsArray = currentDef['options'].split("//");
+      var optionsString = "";
+      for (var i = 0; i < textOptionsArray.length; i++) {
+        var currentTextOption = "<span> " + textOptionsArray[i] + "</span>";
+        optionsString = optionsString.concat(currentTextOption);
+      }
+
+      var endString = "</span>";
+      return starterString.concat(optionsString, endString);
+    },
+
+    createOther: function(currentDef) {
+      return '<span ' +
+              ' data-var='    + '\"' + currentDef['data-var']   + '\"' +
+              ' data-format=' + '\"' + currentDef['data-format']+ '\"' +
+              ' ></span>';
+    }, 
+
+    parsePieces: function(pieces) {
+      var endStringArray = [];
+      for (var i=0; i < this.pieces.length; i++) {
+        console.log(endStringArray);
+        var item = this.pieces[i];
+        var lastIndex = item.length;
+        var varString = item.substring(1, lastIndex-1);
+        console.log("varString:", varString);
+        if (this.indList.indexOf(item) >=0) {
+          var currentDef = this.indDef[item];
+          console.log("Current def: ", currentDef);
+          if (currentDef.class === "TKAdjustableNumber") {
+            var spanTag = this.createTKAdjustableNumber(currentDef);
+            endStringArray.push(spanTag);
+          } else if (currentDef.class === "TKToggle TKSwitch") {
+            endStringArray.push(this.createTKToggleSwitch(currentDef));
+          }
+        } else if (this.depList.indexOf(item) >=0) {
+          var currentDef = this.depDef[item];
+          console.log("Current def: ", currentDef);
+          if (currentDef.class === "TKSwitch") {
+            endStringArray.push(this.createTKSwitch(currentDef));
+          } else if (currentDef.class === "TKSwitchPositiveNegative") {
+            endStringArray.push(this.createTKSwitchPositiveNegative(currentDef));
+          } else if (currentDef.class === "NULL") {
+            endStringArray.push(this.createOther(currentDef));
+          } 
+        } else if (this.constList.indexOf(item) >=0) {
+          endStringArray.push(this.createOther(currentDef));
+        } else {
+          endStringArray.push(item);
+        }
+      }
+
+      return endStringArray.join(""); 
+    }
+  }
   var absurd = Absurd();
   var html = absurd.morph("html").add({
       body: {
-          p: "<% for (var i=0; i \< this.pieces.length; i++) { %>" +
-"<% var item = this.pieces[i]; %>" +
-"<% var lastIndex = item.length; %>" +
-"<% var varString = item.substring(1, lastIndex-1); %>" +
-"<% if (indList.indexOf(item) \>= 0) { %>" +
-"<% var currentDef = indDef['varString']; %>" +
-"<% } %>" +
-"<% } %>" 
+          p: "<% this.parsePieces(this.pieces) %>"
       }
   }).compile(function(err, html) {
       console.log("Error: ", err);
       console.log("HTML: ", html);
   }, data);
-
   return html;
 };
 }; 

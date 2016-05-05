@@ -16,7 +16,7 @@
         "class": {
             "type": "String",
             "title": "Microtype",
-            "enum": ["TkAdjustable number", "TkToggle TkSwitch"],
+            "enum": ["TKAdjustableNumber", "TKToggle TKSwitch"],
             "required": true 
 
         },
@@ -50,6 +50,7 @@
       "data-min": ["class"],
       "data-max": ["class"],
       "data-step": ["class"],
+      "data-format": ["class"],
       "data-values": ["class"]
     }
 }

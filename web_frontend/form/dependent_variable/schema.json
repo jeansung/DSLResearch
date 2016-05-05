@@ -15,7 +15,7 @@
         "class": {
             "type": "String",
             "title": "Microtype",
-            "enum": ["NULL", "TKSwitchPositiveNegative", "TkSwitch"],
+            "enum": ["NULL", "TKSwitchPositiveNegative", "TKSwitch"],
             "required": true 
 
         },

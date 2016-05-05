@@ -20,22 +20,27 @@
         },
         "data-min": {
           "dependencies": {
-            "class": "TkAdjustable number"
+            "class": "TKAdjustableNumber"
           }
         },
         "data-max": {
           "dependencies": {
-            "class": "TkAdjustable number"
+            "class": "TKAdjustableNumber"
           }
         },
         "data-step": {
           "dependencies": {
-            "class": "TkAdjustable number"
+            "class": "TKAdjustableNumber"
+          }
+        },
+        "data-format": {
+          "dependencies": {
+            "class": "TKAdjustableNumber"
           }
         },
         "data-values": {
           "dependencies": {
-            "class": "TkToggle TkSwitch"
+            "class": "TKToggle TKSwitch"
           }
         }
       }

@@ -21,38 +21,38 @@
     },
     "data-value": {
       "dependencies": {
-        "microtype": "NULL"
+        "class": "NULL"
       }
 
       },
     "data-format": {
       "dependencies": {
-        "microtype": "NULL"
+        "class": "NULL"
       }
     },
     "backing_variable": {
       "dependencies": {
-        "microtype": "TKSwitchPositiveNegative"
+        "class": "TKSwitchPositiveNegative"
       }
     },
     "positive": {
       "dependencies": {
-        "microtype": "TKSwitchPositiveNegative"
+        "class": "TKSwitchPositiveNegative"
       }
     },
     "negative": {
       "dependencies": {
-        "microtype": "TKSwitchPositiveNegative"
+        "class": "TKSwitchPositiveNegative"
       }
     },
     "isRecursive": {
       "dependencies": {
-        "microtype": "TkSwitch"
+        "class": "TKSwitch"
       }
     },
     "options": {
       "dependencies": {
-        "microtype": "TkSwitch"
+        "class": "TKSwitch"
       }
     }
   }
