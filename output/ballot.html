@@ -1,9 +1,9 @@
-<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN'>
+﻿<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN'>
 <html lang="en">
 <head>
 <meta content="text/html; charset=utf_8" http-equiv="Content-Type" />
 <link media="all" href="dependencies/TangleKit/TangleKit.css" type="text/css" rel="stylesheet" />
-<title>Placeholder title</title>
+<title>InteractiveHTML</title>
 <script src="dependencies/Tangle.js" type="text/javascript"></script>
 <script src="dependencies/TangleKit/mootools.js" type="text/javascript"></script>
 <script src="dependencies/TangleKit/sprintf.js" type="text/javascript"></script>
@@ -12,24 +12,17 @@
 <script src="ballot.js" type="text/javascript"></script>
 </head>
 <body>
-<p id="ballotExample">
-My house is valued at $
-<span class="TKAdjustableNumber" data-var="myHouseValue" data-max="10000000" data-step="500000" data-min="100000"></span>
- . If the levy is 
-<span class="TKAdjustableNumber" data-var="levyPerHouse" data-max="50" data-step="1" data-min="1"></span>
- cents per $1000, then I pay $
-<span data-var="myPayment" data-format="%0.2f"></span>
- annually. The average house value in this district is $
-<span class="TKAdjustableNumber" data-var="averageHouseValue" data-max="10000000" data-step="500000" data-min="100000"></span>
- , and with a levy of 
-<span class="TKAdjustableNumber" data-var="levyPerHouse" data-max="50" data-step="1" data-min="1"></span>
- cents per $1000 on  
-<span class="TKAdjustableNumber" data-var="percentParticipating" data-max="100" data-step="5" data-min="0"></span>
- of houses, if we collect for 
-<span class="TKAdjustableNumber" data-var="numYears" data-max="5" data-step="1" data-min="0"></span>
- , we can raise $
-<span data-var="totalAmountRaised" data-format="%0.2f"></span>
- in total to help the school districts.
-</p>
-</body>
+    <p id="ballotExample"> 
+        My house is valued at $
+        <span data-var="myHouseValue" class= "TKAdjustableNumber" data-min="100000" data-max="10000000" data-step="500000" data-format="undefined">
+        </span>
+         . If the levy is 
+         <span data-var="levyPerHouse" class= "TKAdjustableNumber" data-min="1" data-max="50" data-step="1" data-format="undefined" ></span>
+          cents per $1000, then I pay $
+          <span  data-var="myPayment" data-format="%0.2f" ></span> 
+          annually. The average house value in this district is $
+          <span data-var="averageHouseValue" class= "TKAdjustableNumber" data-min="100000" data-max="10000000" data-step="500000" data-format="undefined" ></span>
+            , and with a levy of 
+          <span data-var="levyPerHouse" class= "TKAdjustableNumber" data-min="1" data-max="50" data-step="1" data-format="undefined" ></span> cents per $1000 on  <span data-var="percentParticipating" class= "TKAdjustableNumber" data-min="0" data-max="100" data-step="5" data-format="undefined" ></span> of houses, if we collect for <span data-var="numYears" class= "TKAdjustableNumber" data-min="0" data-max="5" data-step="1" data-format="undefined" ></span> , we can raise $<span  data-var="totalAmountRaised" data-format="0.2f" ></span> in total to help the school districts.
+</p></body>
 </html>
